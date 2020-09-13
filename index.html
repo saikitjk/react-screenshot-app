@@ -42,6 +42,7 @@
               <button type="submit" class="btn btn-primary btn-md" id="ss-btn"><span class="fa fa-fire"></span> Get
                 screenshot</button>
             </div>
+            <div id='test'></div>
           </div>
         </div>
 
@@ -58,11 +59,15 @@
         .then(res => {
           const { result } = res
           console.log(res)
-          const blob = new Blob([result], { type: 'image/png' })
-          const link = document.createElement('a')
-          link.href = window.URL.createObjectURL(blob)
-          link.download = `your-file-name.png`
-          link.click()
+          // const blob = new Blob([result], { type: 'image/png' })
+          // const link = document.createElement('a')
+          // link.href = window.URL.createObjectURL(blob)
+          // link.download = `your-file-name.png`
+          // link.click()
+          var img = document.createElement("img");
+          img.src = "data:image/png;base64," + result;
+          var preview = document.getElementById("test");
+          preview.appendChild(img);
         })
     });
   </script>
