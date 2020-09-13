@@ -41,7 +41,7 @@
             <div class="text-right">
               <button type="submit" class="btn btn-primary btn-md" id="ss-btn"><span class="fa fa-fire"></span> Get
                 screenshot</button>
-            </div>
+            </div><br><br>
             <div id='test'></div>
           </div>
         </div>
@@ -56,23 +56,24 @@
       var url = $("#url").val().trim();
       var array = url.match(/[^\r\n]+/g);
       console.log(array)
-      for (i = 0; i < array.length; i++){
+      for (i = 0; i < array.length; i++) {
         $.post("/api/screenshot", { url: array[i] })
-        .then(res => {
-          const { result } = res
-          console.log(res)
-          // const blob = new Blob([result], { type: 'image/png' })
-          // const link = document.createElement('a')
-          // link.href = window.URL.createObjectURL(blob)
-          // link.download = `your-file-name.png`
-          // link.click()
-          var img = document.createElement("img");
-          img.src = "data:image/png;base64," + result;
-          var preview = document.getElementById("test");
-          preview.appendChild(img);
-        })
+          .then(res => {
+            const { result } = res
+            console.log(res)
+            // const blob = new Blob([result], { type: 'image/png' })
+            // const link = document.createElement('a')
+            // link.href = window.URL.createObjectURL(blob)
+            // link.download = `your-file-name.png`
+            // link.click()
+            var img = document.createElement("img");
+            img.src = "data:image/png;base64," + result;
+            img.height = "250";
+            var preview = document.getElementById("test");
+            preview.appendChild(img);
+          })
       }
-      
+
     });
   </script>
 
