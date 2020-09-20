@@ -49,16 +49,18 @@ async function takeScreenshot(url) {
   });
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: 'networkidle0' });
-  await page.setViewport({
-    width: 1400,
-    height: 1000,
-    deviceScaleFactor: 1,
-  });
-  const screenshot = await page.screenshot()
+  // await page.setViewport({
+  //   width: 1400,
+  //   height: 1000,
+  //   deviceScaleFactor: 1,
+  // });
+  await page.setViewport({width: 1200, height: 1200});
+  const screenshot = await page.screenshot({fullPage: true})
 
   await browser.close();
   return screenshot;
 }
+
 
 
 
