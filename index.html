@@ -43,6 +43,8 @@
                 Reset</button>
               <button type="submit" class="btn btn-primary btn-md" id="ss-btn"><span class="fa fa-camera"></span> Get
                 screenshot</button>
+              <button type="submit" class="btn btn-primary btn-md" id="save-btn"><span class="fa fa-camera"></span> Save
+                screenshot</button>
               <button class="btn btn-primary" type="button" id="load-btn" disabled>
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 Processing. Please wait...
@@ -64,6 +66,11 @@
       location.reload();
     });
 
+    let ranGen = () => {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
 
     $("#ss-btn").on("click", function (event) {
       event.preventDefault();
@@ -159,6 +166,93 @@
       //       }
       //     })
       // }
+
+    });
+
+    $("#save-btn").on("click", function (event) {
+      event.preventDefault();
+      $("#load-btn").show()
+      $("#save-btn").hide()
+      var url = $("#url").val().trim();
+      var array = url.match(/[^\r\n]+/g);
+      console.log(array)
+      console.log("array length: " + array.length)
+      var arrLength = array.length
+
+      var sessID = ranGen()
+      console.log(sessID)
+
+      // var count = 0
+
+      function doNext(count = 0) {
+        var url = array.shift()
+        console.log(count)
+        if (url) {
+          $.post("/api/savescreenshot", { url: url, sessID: sessID, count: count })
+            .then(res => {
+              // console.log(res.statusCode)
+              // const { result } = res
+              // count++
+              // console.log(count)
+              // const { result } = res
+              // console.log("result" + result)
+              count++
+              if (count == arrLength) {
+                $("#load-btn").hide()
+                $("#save-btn").show()
+                downloadFile(sessID)
+                // window.open('/api/savescreenshot')
+                // var button = document.createElement("input");
+                // button.type = "button";
+                // downloadlink = document.createElement('a');
+                // downloadlink.href = "/" + result + '/screenshots.zip'
+                // downloadlink.download = true
+                // downloadlink.appendChild(button)
+                // var preview = document.getElementById("test");
+                // preview.appendChild(downloadlink)
+              }
+              else {
+                doNext(count)
+              }
+            })
+        }
+      }
+
+      function downloadFile(result) {
+        // $.get('/api/download', { result: result })
+        // .then(res=>{
+        //   console.log("DONE")
+        // })
+        console.log("the result is " + result)
+        fetch('/api/download', {
+          method: "post",
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+
+          body: JSON.stringify({
+            data: result
+          })
+        })
+          .then(resp => resp.blob())
+          .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            // the filename you want
+            a.download = 'screenshots.zip';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            alert('your file is ready for download!'); // or you know, something with better UX...
+          })
+          .catch(() => alert('oh no! something went wrong. Please contact the page admin'));
+
+      }
+
+      doNext()
 
     });
   </script>

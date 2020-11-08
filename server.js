@@ -3,6 +3,8 @@
 var express = require("express");
 var path = require("path");
 var puppeteer = require("puppeteer")
+var fs = require('fs')
+var zip = require('node-zip')()
 
 
 // Sets up the Express App
@@ -54,11 +56,93 @@ async function takeScreenshot(url) {
   //   height: 1000,
   //   deviceScaleFactor: 1,
   // });
-  await page.setViewport({width: 1200, height: 1200});
-  const screenshot = await page.screenshot({fullPage: true})
+  await page.setViewport({ width: 1200, height: 1200 });
+  const screenshot = await page.screenshot({ fullPage: true })
 
   await browser.close();
   return screenshot;
+}
+
+app.post('/api/savescreenshot', async (req, res) => {
+  const { url } = req.body
+  const { sessID } = req.body
+  const { count } = req.body
+
+  try {
+    let screenshot = await saveScreenshot(url, sessID, count)
+    if (count == 1){
+      zipFile(sessID)
+      // res.send({ result: sessID })
+    }
+    
+    // let img = screenshot.toString('base64')
+    res.sendStatus(200)
+  } catch (e) {
+    // catch errors and send error status
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
+app.post('/api/download', function(req, res){ 
+  var result = req.body.data
+  console.log("result"+result)
+  res.download(path.join(__dirname, "/" + result + "/screenshots.zip"))
+  // res.download("../" + "0098" + '/screenshots.zip', function(error){ 
+  //     console.log("Error : ", error) 
+  // }); 
+}); 
+
+async function saveScreenshot(url, sessID, count) {
+  console.log(sessID)
+  if (count == 0) {
+    fs.mkdir(path.join(__dirname, sessID), (err) => {
+      if (err) {
+        return console.error(err);
+      }
+      console.log('Directory created successfully!');
+    });
+  }
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox']
+  });
+  const page = await browser.newPage();
+  await page.goto(url, { waitUntil: 'networkidle0' });
+  // await page.setViewport({
+  //   width: 1400,
+  //   height: 1000,
+  //   deviceScaleFactor: 1,
+  // });
+  await page.setViewport({ width: 1200, height: 1200 });
+  await page.screenshot({ path: sessID + '/' + count + '.png' })
+  // const screenshot = await page.screenshot({ path: folder + '/' + count + '.png', fullPage: true })
+
+  await browser.close();
+  // count++
+  // return count
+}
+
+function zipFile(sessID) {
+  var zipName = "screenshots.zip"; // This just creates a variable to store the name of the zip file that you want to create
+  var someDir = fs.readdirSync(__dirname + "/" + sessID); // read the directory that you would like to zip
+  var newZipFolder = zip.folder(sessID); // declare a folder with the same name as the directory you would like to zip (we'll later put the read contents into this folder)
+
+
+  //append each file in the directory to the declared folder
+  for (var i = 0; i < someDir.length; i++) {
+    newZipFolder.file(someDir[i], fs.readFileSync(__dirname + "/" + sessID + '/' + someDir[i]), { base64: true });
+  }
+
+  var data = zip.generate({ base64: false, compression: 'DEFLATE' }); //generate the zip file data
+
+  //write the data to file
+  fs.writeFile(__dirname + "/" + sessID + '/' + zipName, data, 'binary', function (err) {
+    if (err) {
+      console.log(err);
+    }
+    // do something with the new zipped file
+  })
 }
 
 
