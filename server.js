@@ -67,13 +67,22 @@ app.post('/api/savescreenshot', async (req, res) => {
   const { url } = req.body
   const { sessID } = req.body
   const { count } = req.body
+  const { arrLength } = req.body
 
   try {
     let screenshot = await saveScreenshot(url, sessID, count)
-    if (count == 1){
-      zipFile(sessID)
-      // res.send({ result: sessID })
-    }
+    console.log("count: " + count)
+    console.log("arrLength: " + arrLength)
+    const dir = './'+sessID;
+    fs.readdir(dir, (err, files) => {
+      if (files.length== arrLength){
+        zipFile(sessID)
+      }
+    });
+    // if (count+1 == arrLength){
+    //   zipFile(sessID)
+    //   // res.send({ result: sessID })
+    // }
     
     // let img = screenshot.toString('base64')
     res.sendStatus(200)
@@ -114,8 +123,8 @@ async function saveScreenshot(url, sessID, count) {
   //   height: 1000,
   //   deviceScaleFactor: 1,
   // });
-  await page.setViewport({ width: 1200, height: 1200 });
-  await page.screenshot({ path: sessID + '/' + count + '.png' })
+  // await page.setViewport({ width: 1200, height: 1200 });
+  await page.screenshot({ fullPage: true , path: sessID + '/' + count + '.png' })
   // const screenshot = await page.screenshot({ path: folder + '/' + count + '.png', fullPage: true })
 
   await browser.close();

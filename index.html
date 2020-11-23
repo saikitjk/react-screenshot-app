@@ -41,8 +41,8 @@
             <div class="text-right">
               <button type="submit" class="btn btn-primary btn-md" id="reset"><span class="fa fa-refresh"></span>
                 Reset</button>
-              <button type="submit" class="btn btn-primary btn-md" id="ss-btn"><span class="fa fa-camera"></span> Get
-                screenshot</button>
+              <!-- <button type="submit" class="btn btn-primary btn-md" id="ss-btn"><span class="fa fa-camera"></span> Get
+                screenshot</button> -->
               <button type="submit" class="btn btn-primary btn-md" id="save-btn"><span class="fa fa-camera"></span> Save
                 screenshot</button>
               <button class="btn btn-primary" type="button" id="load-btn" disabled>
@@ -187,8 +187,9 @@
       function doNext(count = 0) {
         var url = array.shift()
         console.log(count)
+        console.log(url)
         if (url) {
-          $.post("/api/savescreenshot", { url: url, sessID: sessID, count: count })
+          $.post("/api/savescreenshot", { arrLength: arrLength, url: url, sessID: sessID, count: count })
             .then(res => {
               // console.log(res.statusCode)
               // const { result } = res
@@ -197,6 +198,8 @@
               // const { result } = res
               // console.log("result" + result)
               count++
+              console.log("count: " + count)
+              console.log("arrLength: " + arrLength)
               if (count == arrLength) {
                 $("#load-btn").hide()
                 $("#save-btn").show()
