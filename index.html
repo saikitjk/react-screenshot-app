@@ -49,6 +49,10 @@
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 Processing. Please wait...
               </button>
+              
+              <a class="download" href="/api/download" target="_blank"><button type="submit" class="btn btn-primary btn-md" id="download"><span class="fa fa-camera"></span> Save
+                screenshot</button></a>
+
             </div><br><br>
             <div id='test'></div>
           </div>
@@ -59,6 +63,13 @@
   </div>
 
   <script type="text/javascript">
+    $('#download').click(function (e) {
+      e.preventDefault();
+      window.open('/api/download', '_blank');
+      $("#download").hide()
+    });
+
+    $("#download").hide()
     $("#load-btn").hide()
     $("#ss-btn").show()
 
@@ -203,7 +214,9 @@
               if (count == arrLength) {
                 $("#load-btn").hide()
                 $("#save-btn").show()
-                downloadFile(sessID)
+                $("#download").show()
+                alert('your file is ready for download!')
+                // downloadFile(sessID)
                 // window.open('/api/savescreenshot')
                 // var button = document.createElement("input");
                 // button.type = "button";

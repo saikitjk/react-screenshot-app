@@ -4,7 +4,6 @@ var express = require("express");
 var path = require("path");
 var puppeteer = require("puppeteer")
 var fs = require('fs')
-var zip = require('node-zip')()
 
 
 // Sets up the Express App
@@ -73,17 +72,24 @@ app.post('/api/savescreenshot', async (req, res) => {
     let screenshot = await saveScreenshot(url, sessID, count)
     console.log("count: " + count)
     console.log("arrLength: " + arrLength)
-    const dir = './'+sessID;
+    const dir = './' + sessID;
     fs.readdir(dir, (err, files) => {
-      if (files.length== arrLength){
-        zipFile(sessID)
+      if (files.length == arrLength) {
+        zipFile(sessID, function (err) {
+          if (err) {
+            console.log(err); // Check error if you want
+          }
+          else {
+            return
+          }
+        })
       }
     });
     // if (count+1 == arrLength){
     //   zipFile(sessID)
     //   // res.send({ result: sessID })
     // }
-    
+
     // let img = screenshot.toString('base64')
     res.sendStatus(200)
   } catch (e) {
@@ -93,14 +99,25 @@ app.post('/api/savescreenshot', async (req, res) => {
   }
 });
 
-app.post('/api/download', function(req, res){ 
-  var result = req.body.data
-  console.log("result"+result)
-  res.download(path.join(__dirname, "/" + result + "/screenshots.zip"))
+app.get('/api/download', function (req, res) {
+  // var result = req.body.data
+  // console.log("result"+result)
+  const file = __dirname + "/temp/screenshots.zip";
+  res.download(file, 'screenshots.zip', function (err) {
+    if (err) {
+      console.log(err); // Check error if you want
+    }
+    else {
+      fs.unlink(file, function () {
+        console.log("File was deleted") // Callback
+      });
+    }
+  }); // Set disposition and send it.
+  // res.download(path.join(__dirname, "/" + result + "/screenshots.zip"))
   // res.download("../" + "0098" + '/screenshots.zip', function(error){ 
   //     console.log("Error : ", error) 
   // }); 
-}); 
+});
 
 async function saveScreenshot(url, sessID, count) {
   console.log(sessID)
@@ -124,7 +141,7 @@ async function saveScreenshot(url, sessID, count) {
   //   deviceScaleFactor: 1,
   // });
   // await page.setViewport({ width: 1200, height: 1200 });
-  await page.screenshot({ fullPage: true , path: sessID + '/' + count + '.png' })
+  await page.screenshot({ fullPage: true, path: sessID + '/' + count + '.png' })
   // const screenshot = await page.screenshot({ path: folder + '/' + count + '.png', fullPage: true })
 
   await browser.close();
@@ -133,9 +150,11 @@ async function saveScreenshot(url, sessID, count) {
 }
 
 function zipFile(sessID) {
-  var zipName = "screenshots.zip"; // This just creates a variable to store the name of the zip file that you want to create
-  var someDir = fs.readdirSync(__dirname + "/" + sessID); // read the directory that you would like to zip
-  var newZipFolder = zip.folder(sessID); // declare a folder with the same name as the directory you would like to zip (we'll later put the read contents into this folder)
+  let zip = require('node-zip')()
+
+  let zipName = "screenshots.zip"; // This just creates a variable to store the name of the zip file that you want to create
+  let someDir = fs.readdirSync(__dirname + "/" + sessID); // read the directory that you would like to zip
+  let newZipFolder = zip.folder(sessID); // declare a folder with the same name as the directory you would like to zip (we'll later put the read contents into this folder)
 
 
   //append each file in the directory to the declared folder
@@ -143,12 +162,21 @@ function zipFile(sessID) {
     newZipFolder.file(someDir[i], fs.readFileSync(__dirname + "/" + sessID + '/' + someDir[i]), { base64: true });
   }
 
-  var data = zip.generate({ base64: false, compression: 'DEFLATE' }); //generate the zip file data
+  let data = zip.generate({ base64: false, compression: 'DEFLATE' }); //generate the zip file data
 
   //write the data to file
-  fs.writeFile(__dirname + "/" + sessID + '/' + zipName, data, 'binary', function (err) {
+  fs.writeFile(__dirname + "/temp/" + zipName, data, 'binary', function (err) {
     if (err) {
       console.log(err);
+    }
+    else {
+      fs.rmdir(__dirname + "/" + sessID, { recursive: true }, (err) => {
+        if (err) {
+          throw err;
+        }
+
+        console.log(`${someDir} is deleted!`);
+      });
     }
     // do something with the new zipped file
   })
