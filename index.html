@@ -133,21 +133,25 @@
         $("#load-btn").show()
         $("#save-btn").hide()
         var url = $("#url").val().trim();
-        var array = url.match(/[^\r\n]+/g);
-        console.log(array)
-        console.log("array length: " + array.length)
-        var arrLength = array.length
+        var urlArray = url.match(/[^\r\n]+/g);
+        console.log(urlArray)
+        var arrLength = urlArray.length
+        console.log("array length: " + arrLength)
 
         var sessID = ranGen()
         console.log(sessID)
 
+
+        if(urlArray == null){
+          $("#load-btn").hide()
+          $("#save-btn").show()
+          alert("No URL(s) detected. Please enter the URL(s) and make sure the requirements are met. \n\n Requirements: \n\n  1. Make sure URL is formatted correct (ex. https://www.google.com/ )\n 2. Only 1 URL per line in textbox")
+
+        }
         // var count = 0
 
         function doNext(count = 0) {
-          var url = array.shift()
-          console.log(count)
-          console.log(url)
-          if (url) {
+          if (count <1) {
             $.post("/api/savescreenshot", { arrLength: arrLength, url: url, sessID: sessID, count: count })
               .then(res => {
 
