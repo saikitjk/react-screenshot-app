@@ -114,3 +114,16 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+#images
+*.png
+
+#zip
+*.zip
+
+#temp folder
+temporary
+react-screenshot-app/temporary
+
+
+.DS_Store
