@@ -152,21 +152,20 @@
 
         function doNext(count = 0) {
           if (count <1) {
-            $.post("/api/savescreenshot", { arrLength: arrLength, url: url, sessID: sessID, count: count })
+            $.post("/api/savescreenshot", { arrLength: arrLength, urlArray: urlArray, sessID: sessID})
               .then(res => {
 
-                count++
-                console.log("count: " + count)
-                console.log("arrLength: " + arrLength)
-                if (count == arrLength) {
-                  $("#load-btn").hide()
-                  $("#save-btn").show()
-                  $("#download").show()
-                  alert('your file is ready for download!')
-                }
-                else {
-                  doNext(count)
-                }
+                console.log("ok")
+
+                // if (count == arrLength) {
+                //   $("#load-btn").hide()
+                //   $("#save-btn").show()
+                //   $("#download").show()
+                //   alert('your file is ready for download!')
+                // }
+                // else {
+                //   doNext()
+                //}
               }).fail(function (xhr, status, error) {
                 console.log("error" + error)
                 // error handling
