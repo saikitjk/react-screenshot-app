@@ -40,6 +40,16 @@ app.post("/api/savescreenshot", async (req, res) => {
   console.log("The amount of URLs: " + urlArray.length);
 
   try {
+    async () => {
+      const cluster = await Cluster.launch({
+        concurrency: Cluster.CONCURRENCY_BROWSER, //To prevent hang
+        maxConcurrency: 10, //Set 10 for now, can use concurrentValue for dynamic treshold
+        workerCreationDelay: 200, //to prevent max cpu at the start
+        monitor: true, //enable stats on the backend for visibility
+        headless: true,
+        timeout: 600000,
+      });
+    };
     res.sendStatus(200);
   } catch (e) {
     // catch errors and send error status
