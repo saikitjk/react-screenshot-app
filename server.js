@@ -49,6 +49,10 @@ app.post("/api/savescreenshot", async (req, res) => {
         headless: true,
         timeout: 600000,
       });
+
+      cluster.on("taskerror", (err, data) => {
+        console.log(`Error crawling ${data}: ${err.message}`);
+      });
     };
     res.sendStatus(200);
   } catch (e) {
