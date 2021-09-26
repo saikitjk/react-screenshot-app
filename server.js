@@ -37,6 +37,8 @@ app.post("/api/savescreenshot", async (req, res) => {
     }
   }
 
+  console.log("The amount of URLs: " + urlArray.length);
+
   try {
     res.sendStatus(200);
   } catch (e) {
