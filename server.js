@@ -51,27 +51,6 @@ app.post("/api/savescreenshot", async (req, res) => {
   const { arrLength } = req.body;
 
   try {
-    let screenshot = await saveScreenshot(url, sessID, count);
-    console.log("count: " + count);
-    console.log("arrLength: " + arrLength);
-    const dir = "./" + sessID;
-    fs.readdir(dir, (err, files) => {
-      if (files.length == arrLength) {
-        zipFile(sessID, function (err) {
-          if (err) {
-            console.log(err); // Check error if you want
-          } else {
-            return;
-          }
-        });
-      }
-    });
-    // if (count+1 == arrLength){
-    //   zipFile(sessID)
-    //   // res.send({ result: sessID })
-    // }
-
-    // let img = screenshot.toString('base64')
     res.sendStatus(200);
   } catch (e) {
     // catch errors and send error status
@@ -99,38 +78,38 @@ app.get("/api/download", function (req, res) {
   // });
 });
 
-async function saveScreenshot(url, sessID, count) {
-  console.log(sessID);
-  if (count == 0) {
-    fs.mkdir(path.join(__dirname, sessID), (err) => {
-      if (err) {
-        return console.error(err);
-      }
-      console.log("Directory created successfully!");
-    });
-  }
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ["--no-sandbox"],
-  });
-  const page = await browser.newPage();
-  await page.goto(url, { waitUntil: "networkidle0" });
-  // await page.setViewport({
-  //   width: 1400,
-  //   height: 1000,
-  //   deviceScaleFactor: 1,
-  // });
-  // await page.setViewport({ width: 1200, height: 1200 });
-  await page.screenshot({
-    fullPage: true,
-    path: sessID + "/" + count + ".png",
-  });
-  // const screenshot = await page.screenshot({ path: folder + '/' + count + '.png', fullPage: true })
+// async function saveScreenshot(url, sessID, count) {
+//   console.log(sessID);
+//   if (count == 0) {
+//     fs.mkdir(path.join(__dirname, sessID), (err) => {
+//       if (err) {
+//         return console.error(err);
+//       }
+//       console.log("Directory created successfully!");
+//     });
+//   }
+//   const browser = await puppeteer.launch({
+//     headless: true,
+//     args: ["--no-sandbox"],
+//   });
+//   const page = await browser.newPage();
+//   await page.goto(url, { waitUntil: "networkidle0" });
+//   // await page.setViewport({
+//   //   width: 1400,
+//   //   height: 1000,
+//   //   deviceScaleFactor: 1,
+//   // });
+//   // await page.setViewport({ width: 1200, height: 1200 });
+//   await page.screenshot({
+//     fullPage: true,
+//     path: sessID + "/" + count + ".png",
+//   });
+//   // const screenshot = await page.screenshot({ path: folder + '/' + count + '.png', fullPage: true })
 
-  await browser.close();
-  // count++
-  // return count
-}
+//   await browser.close();
+//   // count++
+//   // return count
+// }
 
 function zipFile(sessID) {
   let zip = require("node-zip")();
@@ -153,7 +132,7 @@ function zipFile(sessID) {
   //write the data to file
   fs.writeFile(__dirname + "/temp/" + zipName, data, "binary", function (err) {
     if (err) {
-      console.log(err);
+      console.log("triggered: " + err);
     } else {
       fs.rmdir(__dirname + "/" + sessID, { recursive: true }, (err) => {
         if (err) {
@@ -163,7 +142,6 @@ function zipFile(sessID) {
         console.log(`${someDir} is deleted!`);
       });
     }
-    // do something with the new zipped file
   });
 }
 
