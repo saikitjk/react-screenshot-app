@@ -133,9 +133,9 @@
         $("#load-btn").show()
         $("#save-btn").hide()
         var url = $("#url").val().trim();
-        var urlArray = url.match(/[^\r\n]+/g);
-        console.log(urlArray)
-        var arrLength = urlArray.length
+        var urlList = url.match(/[^\r\n]+/g);
+        console.log(urlList)
+        var arrLength = urlList.length
         console.log("array length: " + arrLength)
 
         var sessID = ranGen()
@@ -152,7 +152,7 @@
 
         function doNext(count = 0) {
           if (count <1) {
-            $.post("/api/savescreenshot", { arrLength: arrLength, urlArray: urlArray, sessID: sessID})
+            $.post("/api/savescreenshot", { arrLength: arrLength, urlList: urlList, sessID: sessID})
               .then(res => {
 
                 console.log("ok")

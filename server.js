@@ -25,30 +25,17 @@ app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-async function takeScreenshot(url) {
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ["--no-sandbox"],
-  });
-  const page = await browser.newPage();
-  await page.goto(url, { waitUntil: "networkidle0" });
-  // await page.setViewport({
-  //   width: 1400,
-  //   height: 1000,
-  //   deviceScaleFactor: 1,
-  // });
-  await page.setViewport({ width: 1200, height: 1200 });
-  const screenshot = await page.screenshot({ fullPage: true });
-
-  await browser.close();
-  return screenshot;
-}
-
 app.post("/api/savescreenshot", async (req, res) => {
-  const { url } = req.body;
+  //req carry arrLength,sessID,urlList from frontend
   const { sessID } = req.body;
-  const { count } = req.body;
   const { arrLength } = req.body;
+  var concurrenyValue = parseInt(arrLength); //this is for dynamic concyrrency value
+  //convert urlList in req.body into an array
+  for (var urlList in req.body) {
+    if (req.body.hasOwnProperty("urlList")) {
+      var urlArray = req.body[urlList];
+    }
+  }
 
   try {
     res.sendStatus(200);
