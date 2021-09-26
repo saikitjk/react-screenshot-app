@@ -127,47 +127,153 @@
           .substring(1);
       }
 
+      $("#ss-btn").on("click", function (event) {
+        event.preventDefault();
+        $("#load-btn").show()
+        $("#ss-btn").hide()
+        var url = $("#url").val().trim();
+        var array = url.match(/[^\r\n]+/g);
+        console.log(array)
+        console.log("array length: " + array.length)
+        var arrLength = array.length
+        // var count = 0
+
+        function doNext(count = 0) {
+          var url = array.shift()
+          if (url) {
+            $.post("/api/screenshot", { url: url })
+              .then(res => {
+                // console.log(res.statusCode)
+                const { result } = res
+                // count++
+                // console.log(count)
+                console.log(res)
+                // console.log(array)
+                var div = document.createElement("div");
+                var img = document.createElement("img");
+                img.src = "data:image/png;base64," + result;
+                img.style.width = "100%";
+                img.setAttribute("id", "screenshot");
+                var br = document.createElement("br")
+                var br2 = document.createElement("br")
+                var br3 = document.createElement("br")
+                var link = document.createElement("h3")
+                link.innerText = "URL: " + url
+                // link.innerText = count+1 + ". " + url
+                var hr = document.createElement("hr")
+                var preview = document.getElementById("test");
+                div.appendChild(link)
+                div.appendChild(br)
+                div.appendChild(img)
+                div.appendChild(br2)
+                div.appendChild(br3)
+                div.appendChild(hr)
+                preview.appendChild(div)
+
+
+                // count++
+                // if (count == array.length) {
+                //   $("#load-btn").hide()
+                //   $("#ss-btn").show()
+                // }
+                // console.log("count: "+ count)
+              }).fail(function (xhr, status, error) {
+                // error handling
+                $("#load-btn").hide()
+                $("#ss-btn").show()
+                alert("Please check the URL(s) you've entered and make sure the requirements are met. \n\n Requirements: \n\n  1. Make sure URL is formatted correct (ex. https://www.google.com/ )\n 2. Only 1 URL per line in textbox")
+              });
+
+
+            $("#test").on('DOMNodeInserted', function () {
+              // console.log(url)
+              // console.log(array)
+              count++
+              console.log(count)
+              doNext(count)
+
+              if (count == arrLength) {
+                $("#load-btn").hide()
+                $("#ss-btn").show()
+              }
+            });
+          }
+        }
+
+        doNext()
+
+        // for (i = 0; i < array.length; i++) {
+        //   var count = 0
+        //   $.post("/api/screenshot", { url: array[i] })
+        //     .done(res => {
+        //       const { result } = res
+        //       count++
+        //       console.log(count)
+        //       console.log(res)
+        //       var img = document.createElement("img");
+        //       img.src = "data:image/png;base64," + result;
+        //       img.height = "500";
+        //       var preview = document.getElementById("test");
+        //       preview.appendChild(img);
+        //       if (count == array.length) {
+        //         $("#load-btn").hide()
+        //         $("#ss-btn").show()
+        //       }
+        //     })
+        // }
+
+      });
 
       $("#save-btn").on("click", function (event) {
         event.preventDefault();
         $("#load-btn").show()
         $("#save-btn").hide()
         var url = $("#url").val().trim();
-        var urlList = url.match(/[^\r\n]+/g);
-        console.log(urlList)
-        var arrLength = urlList.length
-        console.log("array length: " + arrLength)
+        var array = url.match(/[^\r\n]+/g);
+        console.log(array)
+        console.log("array length: " + array.length)
+        var arrLength = array.length
 
         var sessID = ranGen()
         console.log(sessID)
 
-
-        if(urlArray == null){
-          $("#load-btn").hide()
-          $("#save-btn").show()
-          alert("No URL(s) detected. Please enter the URL(s) and make sure the requirements are met. \n\n Requirements: \n\n  1. Make sure URL is formatted correct (ex. https://www.google.com/ )\n 2. Only 1 URL per line in textbox")
-
-        }
         // var count = 0
 
         function doNext(count = 0) {
-          if (count <1) {
-            $.post("/api/savescreenshot", { arrLength: arrLength, urlList: urlList, sessID: sessID})
+          var url = array.shift()
+          console.log(count)
+          console.log(url)
+          if (url) {
+            $.post("/api/savescreenshot", { arrLength: arrLength, url: url, sessID: sessID, count: count })
               .then(res => {
-
-                console.log("ok")
-
-                //add action later
-
-                // if (count == arrLength) {
-                //   $("#load-btn").hide()
-                //   $("#save-btn").show()
-                //   $("#download").show()
-                //   alert('your file is ready for download!')
-                // }
-                // else {
-                //   doNext()
-                //}
+                // console.log(res.statusCode)
+                // const { result } = res
+                // count++
+                // console.log(count)
+                // const { result } = res
+                // console.log("result" + result)
+                count++
+                console.log("count: " + count)
+                console.log("arrLength: " + arrLength)
+                if (count == arrLength) {
+                  $("#load-btn").hide()
+                  $("#save-btn").show()
+                  $("#download").show()
+                  alert('your file is ready for download!')
+                  // downloadFile(sessID)
+                  // window.open('/api/savescreenshot')
+                  // var button = document.createElement("input");
+                  // button.type = "button";
+                  // downloadlink = document.createElement('a');
+                  // downloadlink.href = "/" + result + '/screenshots.zip'
+                  // downloadlink.download = true
+                  // downloadlink.appendChild(button)
+                  // var preview = document.getElementById("test");
+                  // preview.appendChild(downloadlink)
+                }
+                else {
+                  doNext(count)
+                }
               }).fail(function (xhr, status, error) {
                 console.log("error" + error)
                 // error handling
@@ -175,12 +281,14 @@
                 $("#save-btn").show()
                 alert("Please check the URL(s) you've entered and make sure the requirements are met. \n\n Requirements: \n\n  1. Make sure URL is formatted correct (ex. https://www.google.com/ )\n 2. Only 1 URL per line in textbox")
               });
-              count++
           }
         }
 
         function downloadFile(result) {
-
+          // $.get('/api/download', { result: result })
+          // .then(res=>{
+          //   console.log("DONE")
+          // })
           console.log("the result is " + result)
           fetch('/api/download', {
             method: "post",
