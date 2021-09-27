@@ -77,6 +77,7 @@ app.post("/api/savescreenshot", async (req, res) => {
 
         cluster.queue(urlArray[i]);
       }
+      await cluster.idle();
     };
     res.sendStatus(200);
   } catch (e) {
