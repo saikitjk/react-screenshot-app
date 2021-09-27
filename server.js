@@ -53,6 +53,16 @@ app.post("/api/savescreenshot", async (req, res) => {
       cluster.on("taskerror", (err, data) => {
         console.log(`Error crawling ${data}: ${err.message}`);
       });
+
+      await cluster.task(async ({ page, data: url, worker }) => {
+        await page.goto(url, { waitUntil: "networkidle0", timeout: 0 });
+
+        await page.screenshot({
+          fullPage: true,
+          path: `${sessID}` + "/" + url.replace(/[^a-zA-Z]/g, "_") + ".png",
+        });
+        console.log(`Screenshot of ${url} saved`);
+      });
     };
     res.sendStatus(200);
   } catch (e) {
