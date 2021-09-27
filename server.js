@@ -63,6 +63,20 @@ app.post("/api/savescreenshot", async (req, res) => {
         });
         console.log(`Screenshot of ${url} saved`);
       });
+
+      //use the urlArray into the cluster queue and create dir
+      for (let i = 0; i < urlArray.length; i++) {
+        if (i === 0) {
+          fs.mkdir(path.join(__dirname, sessID), (err) => {
+            if (err) {
+              return console.error("mkdir error: " + err);
+            }
+            console.log("Directory created successfully!");
+          });
+        }
+
+        cluster.queue(urlArray[i]);
+      }
     };
     res.sendStatus(200);
   } catch (e) {
