@@ -198,6 +198,7 @@ function zipFile(sessID) {
       });
     }
   });
+  return;
 }
 
 // Starts the server to begin listening
