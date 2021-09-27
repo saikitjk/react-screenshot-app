@@ -100,8 +100,9 @@ app.post("/api/savescreenshot", async (req, res) => {
           return res.status(200).json({ readyDl: readyDl });
         }
       });
+
+      console.log("Completed");
     };
-    res.sendStatus(200);
   } catch (e) {
     // catch errors and send error status
     console.log(e);
@@ -178,6 +179,10 @@ function zipFile(sessID) {
   }
 
   let data = zip.generate({ base64: false, compression: "DEFLATE" }); //generate the zip file data
+
+  fs.promises
+    .mkdir(__dirname + "/temp/", { recursive: true })
+    .catch(console.error);
 
   //write the data to file
   fs.writeFile(__dirname + "/temp/" + zipName, data, "binary", function (err) {
