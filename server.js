@@ -79,6 +79,24 @@ app.post("/api/savescreenshot", async (req, res) => {
       }
       await cluster.idle();
       await cluster.close();
+
+      //***********Find folder and zip it and send ready signal to frontend*************/
+
+      const dir = "./" + sessID; //dir = sessid folder location
+      var readyDl = false; //ready for doanload is set to false by default
+      fs.readdir(dir, (err, files) => {
+        console.log("File size: " + files.length); //files.length is the amount of screenshot captured in dir
+        if (files.length == urlArray.length) {
+          //if captured amount is equal to asked amount, call zipFile function to zip
+          zipFile(sessID, function (err) {
+            if (err) {
+              console.log(err);
+            } else {
+              return;
+            }
+          });
+        }
+      });
     };
     res.sendStatus(200);
   } catch (e) {
