@@ -155,19 +155,17 @@
             $.post("/api/savescreenshot", { arrLength: arrLength, urlList: urlList, sessID: sessID})
               .then(res => {
 
-                console.log("ok")
+                console.log("respsonse from server: " + res.readyDl)
 
-                //add action later
-
-                // if (count == arrLength) {
-                //   $("#load-btn").hide()
-                //   $("#save-btn").show()
-                //   $("#download").show()
-                //   alert('your file is ready for download!')
-                // }
-                // else {
-                //   doNext()
-                //}
+                if(res.readyDl === true){
+                  $("#load-btn").hide()
+                  $("#save-btn").show()
+                  $("#download").show()
+                  alert('your file is ready for download!')
+                }
+                else{
+                  doNext()
+                }
               }).fail(function (xhr, status, error) {
                 console.log("error" + error)
                 // error handling
