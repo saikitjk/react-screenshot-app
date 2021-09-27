@@ -95,6 +95,9 @@ app.post("/api/savescreenshot", async (req, res) => {
               return;
             }
           });
+          readyDl = true;
+          console.log("Is ready to download: " + readyDl);
+          return res.status(200).json({ readyDl: readyDl });
         }
       });
     };
