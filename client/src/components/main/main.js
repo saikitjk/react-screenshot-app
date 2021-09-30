@@ -9,15 +9,14 @@ class Main extends React.Component {
     return (
       <div>
         <Card>
-          <CardTitle>
-            <CardBody>
-              <SearchBox
-                //  inputURL={this.state.url}
-                handleInputChange={this.handleInputChange}
-                handleGrab={this.handleGrab}
-              />
-            </CardBody>
-          </CardTitle>
+          <CardTitle tag="h3">Enter URL below </CardTitle>
+          <CardBody>
+            <SearchBox
+              //  inputURL={this.state.url}
+              handleInputChange={this.handleInputChange}
+              handleGrab={this.handleGrab}
+            />
+          </CardBody>
         </Card>
       </div>
     );
