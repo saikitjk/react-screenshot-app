@@ -4,7 +4,10 @@ import { Card, CardTitle, CardBody } from "reactstrap";
 import "./main.css";
 
 class Main extends React.Component {
-  state = { url: "", urlArray: [] };
+  state = {
+    url: "",
+    urlArray: [],
+  };
   render() {
     return (
       <div>
