@@ -26,6 +26,7 @@ export default function searchBox(props) {
           type="submit"
           id="reset"
         >
+          <FaSyncAlt />
           Reset
         </Button>
 
@@ -37,6 +38,7 @@ export default function searchBox(props) {
           type="submit"
           id="save-btn"
         >
+          <FaCameraRetro />
           Grab screenshots
         </Button>
 
@@ -59,6 +61,7 @@ export default function searchBox(props) {
           type="submit"
           id="download"
         >
+          <FaDownload />
           Download File
         </Button>
       </div>
