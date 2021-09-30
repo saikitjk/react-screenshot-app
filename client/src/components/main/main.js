@@ -8,6 +8,14 @@ class Main extends React.Component {
     url: "",
     urlArray: [],
   };
+
+  handleInputChange = (event) => {
+    const url = event.target.value;
+    //onsole.log("url " + url) //this console.log can see the onChange of user's input
+    this.setState({ urlArray: url.trim().match(/[^\r\n]+/g) });
+    //console.log("urlArray: " + this.state.urlArray)
+  };
+
   render() {
     return (
       <div>
