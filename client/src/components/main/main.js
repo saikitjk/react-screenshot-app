@@ -5,7 +5,17 @@ import "./main.css";
 
 class Main extends React.Component {
   render() {
-    return <div></div>;
+    return (
+      <div>
+        <Card>
+          <CardTitle>
+            <CardBody>
+              <SearchBox />
+            </CardBody>
+          </CardTitle>
+        </Card>
+      </div>
+    );
   }
 }
 
