@@ -27,7 +27,13 @@ export default function searchBox() {
         >
           Grab screenshots
         </Button>
-        <Button color="primary" className="loadBtn" type="button" id="load-btn">
+        <Button
+          color="primary"
+          className="loadBtn"
+          type="button"
+          id="load-btn"
+          disabled
+        >
           Processing. Please wait...
         </Button>
         <Button color="primary" className="dlBtn" type="submit" id="download">
