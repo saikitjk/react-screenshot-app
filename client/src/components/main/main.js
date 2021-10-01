@@ -1,6 +1,7 @@
 import React from "react";
 import SearchBox from "../searchBox/searchBox";
 import { Card, CardTitle, CardBody } from "reactstrap";
+import axios from "axios";
 import "./main.css";
 
 class Main extends React.Component {
@@ -41,9 +42,22 @@ class Main extends React.Component {
 
     function doNext(count = 0) {
       console.log("doNext function is triggered");
+      if (count < 1) {
+        axios.request({
+          method: "POST",
+          url: "http://localhost:3001/api/savescreenshot",
+          header: { "Content-Type": "x-www-form-urlencoded" },
+          data: {
+            arrLength: arrLength,
+            sessID: sessID,
+            urlArray: urlArray,
+          },
+        });
+      }
     }
 
     if (arrLength > 0) {
+      //make sure urlArray has URL before doNext is triggered
       doNext();
     }
   };
