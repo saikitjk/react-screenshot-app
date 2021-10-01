@@ -14,7 +14,6 @@ class Main extends React.Component {
     const url = event.target.value;
     //onsole.log("url " + url) //this console.log can see the onChange of user's input
     this.setState({ urlArray: url.trim().match(/[^\r\n]+/g) });
-    //console.log("urlArray: " + this.state.urlArray)
   };
 
   //submit button
@@ -28,6 +27,21 @@ class Main extends React.Component {
     };
 
     var sessID = ranGen();
+    var arrLength = this.state.urlArray.length;
+    var urlArray = this.state.urlArray; //variable in handlegrab that takes from state object properties
+
+    //CONSOLE LOG FIELD
+    console.log("sessID after hitting the grab button: " + sessID);
+    console.log(
+      "urlArray in stateObject after hitting grab button: " + urlArray
+    );
+    console.log("Array length: " + arrLength);
+    console.log("print out the state object: " + this.state);
+    //CONSOLE LOG FIELD
+
+    function doNext(count = 0) {
+      console.log("doNext function is triggered");
+    }
   };
 
   render() {
