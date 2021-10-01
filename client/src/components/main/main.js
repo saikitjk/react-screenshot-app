@@ -42,6 +42,10 @@ class Main extends React.Component {
     function doNext(count = 0) {
       console.log("doNext function is triggered");
     }
+
+    if (arrLength > 0) {
+      doNext();
+    }
   };
 
   render() {
