@@ -43,16 +43,44 @@ class Main extends React.Component {
     function doNext(count = 0) {
       console.log("doNext function is triggered");
       if (count < 1) {
-        axios.request({
-          method: "POST",
-          url: "http://localhost:3001/api/savescreenshot",
-          header: { "Content-Type": "x-www-form-urlencoded" },
-          data: {
-            arrLength: arrLength,
-            sessID: sessID,
-            urlArray: urlArray,
-          },
-        });
+        axios
+          .request({
+            method: "POST",
+            url: "http://localhost:3001/api/savescreenshot",
+            header: { "Content-Type": "x-www-form-urlencoded" },
+            data: {
+              arrLength: arrLength,
+              sessID: sessID,
+              urlArray: urlArray,
+            },
+          })
+          .then((res) => {
+            //receive server response here
+            console.log("response from server: " + JSON.stringify(res));
+            console.log("res.data: " + res.data);
+
+            if (res.data === true) {
+              //makes below buttons show and hide
+              // $("#load-btn").hide()
+              // $("#save-btn").show()
+              // $("#download").show()
+              alert("your file is ready for download!");
+            } else {
+              console.log("something wrong");
+            }
+          });
+        //   .fail(function (xhr, status, error) {
+        //     console.log("xhr" + JSON.stringify(xhr));
+        //     console.log("status" + status);
+        //     console.log("error" + error);
+        //     // error handling
+        //     //   $("#load-btn").hide()
+        //     //   $("#save-btn").show()
+        //     alert(
+        //       "Please check the URL(s) you've entered and make sure the requirements are met. \n\n Requirements: \n\n  1. Make sure URL is formatted correct (ex. https://www.google.com/ )\n 2. Only 1 URL per line in textbox"
+        //     );
+        //   });
+        count++;
       }
     }
 

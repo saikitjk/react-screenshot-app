@@ -129,39 +129,6 @@ app.get("/api/download", function (req, res) {
   // });
 });
 
-// async function saveScreenshot(url, sessID, count) {
-//   console.log(sessID);
-//   if (count == 0) {
-//     fs.mkdir(path.join(__dirname, sessID), (err) => {
-//       if (err) {
-//         return console.error(err);
-//       }
-//       console.log("Directory created successfully!");
-//     });
-//   }
-//   const browser = await puppeteer.launch({
-//     headless: true,
-//     args: ["--no-sandbox"],
-//   });
-//   const page = await browser.newPage();
-//   await page.goto(url, { waitUntil: "networkidle0" });
-//   // await page.setViewport({
-//   //   width: 1400,
-//   //   height: 1000,
-//   //   deviceScaleFactor: 1,
-//   // });
-//   // await page.setViewport({ width: 1200, height: 1200 });
-//   await page.screenshot({
-//     fullPage: true,
-//     path: sessID + "/" + count + ".png",
-//   });
-//   // const screenshot = await page.screenshot({ path: folder + '/' + count + '.png', fullPage: true })
-
-//   await browser.close();
-//   // count++
-//   // return count
-// }
-
 function zipFile(sessID) {
   let zip = require("node-zip")();
 
