@@ -8,6 +8,7 @@ class Main extends React.Component {
   state = {
     url: "",
     urlArray: [],
+    loadingBtnShow: false,
   };
 
   //input box in searchBox
@@ -20,12 +21,15 @@ class Main extends React.Component {
   //submit button
   handleGrab = (event) => {
     event.preventDefault();
-    //generate random sessID
+    this.setState({ loadingBtnShow: true }); //submit triggers loading btn
+
+    ///////GENERATE SESSID FUNCTION /////////////
     let ranGen = () => {
       return Math.floor((1 + Math.random()) * 0x10000)
         .toString(16)
         .substring(1);
     };
+    ///////GENERATE SESSID FUNCTION /////////////
 
     var sessID = ranGen();
     var arrLength = this.state.urlArray.length;
@@ -100,6 +104,7 @@ class Main extends React.Component {
               //  inputURL={this.state.url}
               handleInputChange={this.handleInputChange}
               handleGrab={this.handleGrab}
+              loadingBtnShow={this.state.loadingBtnShow}
             />
           </CardBody>
         </Card>

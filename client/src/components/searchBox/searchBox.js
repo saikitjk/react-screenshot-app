@@ -43,15 +43,17 @@ export default function searchBox(props) {
         </Button>
 
         {/* loading button */}
-        <Button
-          color="primary"
-          className="loadBtn"
-          type="button"
-          id="load-btn"
-          disabled
-        >
-          Processing. Please wait...
-        </Button>
+        {props.loadingBtnShow ? (
+          <Button
+            color="primary"
+            className="loadBtn"
+            type="button"
+            id="load-btn"
+            disabled
+          >
+            Processing. Please wait...
+          </Button>
+        ) : null}
 
         {/* download button */}
         <Button
