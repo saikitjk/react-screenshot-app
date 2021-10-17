@@ -85,11 +85,13 @@ class Main extends React.Component {
           })
           .then((res) => {
             //receive server response here
-            console.log("response from server: " + JSON.stringify(res));
-            console.log("res.data: " + res.data);
+            // console.log("response from server: " + JSON.stringify(res));
+            // console.log("res.data: " + res.data);
 
             if (res.data === true) {
               //makes below buttons show and hide
+              that.disabledLoadingBtn();
+              that.enabledDownloadBtn();
               // $("#load-btn").hide()
               // $("#save-btn").show()
               // $("#download").show()
