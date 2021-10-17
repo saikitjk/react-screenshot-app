@@ -15,6 +15,16 @@ class Main extends React.Component {
 
   //////////////////////////////////////
   /////////Button Control///////////////
+  enabledSubmitBtn = () => {
+    this.setState({ submitBtnShow: true });
+    console.log("Submit Btn enabled.");
+  };
+
+  disabledSubmitBtn = () => {
+    this.setState({ submitBtnShow: false });
+    console.log("Submit Btn disabled.");
+  };
+
   enabledLoadingBtn = () => {
     this.setState({ loadingBtnShow: true });
     console.log("Loading Btn enabled.");
