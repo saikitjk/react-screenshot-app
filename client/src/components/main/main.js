@@ -14,8 +14,25 @@ class Main extends React.Component {
 
   //////////////////////////////////////
   /////////Button Control///////////////
+  enabledLoadingBtn = () => {
+    this.setState({ loadingBtnShow: true });
+    console.log("Loading Btn enabled.");
+  };
 
-  //this.setState({ loadingBtnShow: true });
+  disabledLoadingBtn = () => {
+    this.setState({ loadingBtnShow: false });
+    console.log("Loading Btn enabled.");
+  };
+
+  enabledDownloadBtn = () => {
+    this.setState({ downloadBtnShow: true });
+    console.log("Download Btn enabled.");
+  };
+
+  disabledDownloadBtn = () => {
+    this.setState({ downloadBtnShow: false });
+    console.log("Download Btn disabled.");
+  };
 
   /////////Button Control///////////////
   //////////////////////////////////////
