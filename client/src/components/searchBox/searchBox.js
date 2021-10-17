@@ -56,16 +56,18 @@ export default function searchBox(props) {
         ) : null}
 
         {/* download button */}
-        <Button
-          onClick={props.handleDL}
-          color="primary"
-          className="dlBtn"
-          type="submit"
-          id="download"
-        >
-          <FaDownload />
-          Download File
-        </Button>
+        {props.downloadBtnShow ? (
+          <Button
+            onClick={props.handleDL}
+            color="primary"
+            className="dlBtn"
+            type="submit"
+            id="download"
+          >
+            <FaDownload />
+            Download File
+          </Button>
+        ) : null}
       </div>
     </div>
   );
