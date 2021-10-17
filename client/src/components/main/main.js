@@ -11,6 +11,14 @@ class Main extends React.Component {
     loadingBtnShow: false,
   };
 
+  //////////////////////////////////////
+  /////////Button Control///////////////
+
+  //this.setState({ loadingBtnShow: true });
+
+  /////////Button Control///////////////
+  //////////////////////////////////////
+
   //input box in searchBox
   handleInputChange = (event) => {
     const url = event.target.value;
@@ -21,7 +29,6 @@ class Main extends React.Component {
   //submit button
   handleGrab = (event) => {
     event.preventDefault();
-    this.setState({ loadingBtnShow: true }); //submit triggers loading btn
 
     ///////GENERATE SESSID FUNCTION /////////////
     let ranGen = () => {
@@ -41,7 +48,6 @@ class Main extends React.Component {
       "urlArray in stateObject after hitting grab button: " + urlArray
     );
     console.log("Array length: " + arrLength);
-    console.log("print out the state object: " + this.state);
     //CONSOLE LOG FIELD
 
     function doNext(count = 0) {
@@ -95,6 +101,7 @@ class Main extends React.Component {
   };
 
   render() {
+    console.log("What is in the state object: " + this.state);
     return (
       <div>
         <Card>
