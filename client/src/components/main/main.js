@@ -57,9 +57,12 @@ class Main extends React.Component {
 
   //submit button
   handleGrab = (event) => {
+    event.preventDefault();
+
     const that = this; // this is to keep the scopt of this.state
     that.enabledLoadingBtn();
-    event.preventDefault();
+    that.disabledSubmitBtn();
+
     ///////GENERATE SESSID FUNCTION /////////////
     let ranGen = () => {
       return Math.floor((1 + Math.random()) * 0x10000)
@@ -101,14 +104,14 @@ class Main extends React.Component {
 
             if (res.data === true) {
               //makes below buttons show and hide
-              that.disabledLoadingBtn();
-              that.enabledDownloadBtn();
-              // $("#load-btn").hide()
-              // $("#save-btn").show()
-              // $("#download").show()
+              that.disableLoadingBtn();
+              that.enableSubmitBtn();
+              that.enableDownloadBtn();
               alert("your file is ready for download!");
             } else {
               console.log("something wrong");
+              that.disableLoadingBtn();
+              that.enableSubmitBtn();
             }
           });
         //   .fail(function (xhr, status, error) {
