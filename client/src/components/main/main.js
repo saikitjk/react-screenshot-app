@@ -9,6 +9,7 @@ class Main extends React.Component {
     url: "",
     urlArray: [],
     loadingBtnShow: false,
+    downloadBtnShow: false,
   };
 
   //////////////////////////////////////
@@ -112,6 +113,7 @@ class Main extends React.Component {
               handleInputChange={this.handleInputChange}
               handleGrab={this.handleGrab}
               loadingBtnShow={this.state.loadingBtnShow}
+              downloadBtnShow={this.state.downloadBtnShow}
             />
           </CardBody>
         </Card>
