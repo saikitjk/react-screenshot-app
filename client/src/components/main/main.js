@@ -8,6 +8,7 @@ class Main extends React.Component {
   state = {
     url: "",
     urlArray: [],
+    submitBtnShow: true,
     loadingBtnShow: false,
     downloadBtnShow: false,
   };
@@ -21,7 +22,7 @@ class Main extends React.Component {
 
   disabledLoadingBtn = () => {
     this.setState({ loadingBtnShow: false });
-    console.log("Loading Btn enabled.");
+    console.log("Loading Btn disabled.");
   };
 
   enabledDownloadBtn = () => {
@@ -132,6 +133,7 @@ class Main extends React.Component {
               //  inputURL={this.state.url}
               handleInputChange={this.handleInputChange}
               handleGrab={this.handleGrab}
+              submitBtnShow={this.submitBtnShow}
               loadingBtnShow={this.state.loadingBtnShow}
               downloadBtnShow={this.state.downloadBtnShow}
             />

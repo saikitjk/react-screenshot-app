@@ -31,16 +31,18 @@ export default function searchBox(props) {
         </Button>
 
         {/* submitt button */}
-        <Button
-          onClick={props.handleGrab}
-          color="primary"
-          className="savetBtn"
-          type="submit"
-          id="save-btn"
-        >
-          <FaCameraRetro />
-          Grab screenshots
-        </Button>
+        {props.submitBtnShow ? (
+          <Button
+            onClick={props.handleGrab}
+            color="primary"
+            className="savetBtn"
+            type="submit"
+            id="save-btn"
+          >
+            <FaCameraRetro />
+            Grab screenshots
+          </Button>
+        ) : null}
 
         {/* loading button */}
         {props.loadingBtnShow ? (
