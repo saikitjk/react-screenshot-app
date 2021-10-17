@@ -46,8 +46,9 @@ class Main extends React.Component {
 
   //submit button
   handleGrab = (event) => {
+    const that = this; // this is to keep the scopt of this.state
+    that.enabledLoadingBtn();
     event.preventDefault();
-
     ///////GENERATE SESSID FUNCTION /////////////
     let ranGen = () => {
       return Math.floor((1 + Math.random()) * 0x10000)
