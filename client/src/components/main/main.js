@@ -16,12 +16,12 @@ class Main extends React.Component {
   //////////////////////////////////////
   /////////Button Control///////////////
   enableBtn = (btnProperty) => {
-    this.setState({ [btnProperty]: true }); //dynamic key
+    this.setState({ [btnProperty]: true }); //[] is dynamic key
     console.log(`${JSON.stringify(btnProperty)}. Btn is enabled!`);
   };
 
   disableBtn = (btnProperty) => {
-    this.setState({ [btnProperty]: false }); //dymanic key
+    this.setState({ [btnProperty]: false }); //[] is dymanic key
     console.log(`${JSON.stringify(btnProperty)}. Btn is disabled!`);
   };
 

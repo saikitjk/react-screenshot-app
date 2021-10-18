@@ -83,7 +83,6 @@ app.post("/api/savescreenshot", async (req, res) => {
       //***********Find folder and zip it and send ready signal to frontend*************/
 
       const dir = "./" + sessID; //dir = sessid folder location
-      var readyDl = false; //ready for doanload is set to false by default
       fs.readdir(dir, (err, files) => {
         console.log("File size: " + files.length); //files.length is the amount of screenshot captured in dir
         if (files.length == urlArray.length) {
@@ -95,9 +94,10 @@ app.post("/api/savescreenshot", async (req, res) => {
               return;
             }
           });
-          readyDl = true;
-          console.log("Is ready to download: " + readyDl);
-          return res.status(200).json({ readyDl: readyDl });
+
+          return res
+            .status(200)
+            .json({ readyDl: true, msg: "Your file is ready for download!" });
         }
       });
 
