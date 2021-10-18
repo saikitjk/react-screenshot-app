@@ -15,34 +15,14 @@ class Main extends React.Component {
 
   //////////////////////////////////////
   /////////Button Control///////////////
-  enabledSubmitBtn = () => {
-    this.setState({ submitBtnShow: true });
-    console.log("Submit Btn enabled.");
+  enableBtn = (btnProperty) => {
+    this.setState(btnProperty);
+    console.log(`${JSON.stringify(btnProperty)}. Btn is enabled!`);
   };
 
-  disabledSubmitBtn = () => {
-    this.setState({ submitBtnShow: false });
-    console.log("Submit Btn disabled.");
-  };
-
-  enabledLoadingBtn = () => {
-    this.setState({ loadingBtnShow: true });
-    console.log("Loading Btn enabled.");
-  };
-
-  disabledLoadingBtn = () => {
-    this.setState({ loadingBtnShow: false });
-    console.log("Loading Btn disabled.");
-  };
-
-  enabledDownloadBtn = () => {
-    this.setState({ downloadBtnShow: true });
-    console.log("Download Btn enabled.");
-  };
-
-  disabledDownloadBtn = () => {
-    this.setState({ downloadBtnShow: false });
-    console.log("Download Btn disabled.");
+  disableBtn = (btnProperty) => {
+    this.setState(btnProperty);
+    console.log(`${JSON.stringify(btnProperty)}. Btn is disabled!`);
   };
 
   /////////Button Control///////////////
@@ -58,10 +38,9 @@ class Main extends React.Component {
   //submit button
   handleGrab = (event) => {
     event.preventDefault();
-
     const that = this; // this is to keep the scopt of this.state
-    that.enabledLoadingBtn();
-    that.disabledSubmitBtn();
+    that.enableBtn({ loadingBtnShow: true });
+    that.disableBtn({ submitBtnShow: false });
 
     ///////GENERATE SESSID FUNCTION /////////////
     let ranGen = () => {
@@ -104,14 +83,14 @@ class Main extends React.Component {
 
             if (res.data === true) {
               //makes below buttons show and hide
-              that.disableLoadingBtn();
-              that.enableSubmitBtn();
-              that.enableDownloadBtn();
+              that.disableBtn({ loadingBtnShow: false });
+              that.enableBtn({ submitBtnShow: true });
+              that.enableBtn({ downloadBtnShow: true });
               alert("your file is ready for download!");
             } else {
               console.log("something wrong");
-              that.disableLoadingBtn();
-              that.enableSubmitBtn();
+              that.disableBtn({ loadingBtnShow: false });
+              that.enableBtn({ submitBtnShow: true });
             }
           });
         //   .fail(function (xhr, status, error) {
