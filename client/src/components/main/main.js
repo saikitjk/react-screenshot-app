@@ -77,16 +77,17 @@ class Main extends React.Component {
             },
           })
           .then((res) => {
-            //receive server response here
+            //RECEIVE SERVER DATA HERE
             // console.log("response from server: " + JSON.stringify(res));
             // console.log("res.data: " + res.data);
-
-            if (res.data === true) {
+            const { readyDl } = res.data;
+            //console.log("Value of readyDl: "+readyDl);
+            if (readyDl === true) {
               //makes below buttons show and hide
               that.disableBtn("loadingBtnShow");
               that.enableBtn("submitBtnShow");
               that.enableBtn("downloadBtnShow");
-              alert("your file is ready for download!");
+              console.log("your file is ready for download!");
             } else {
               console.log("something wrong");
               that.disableBtn("loadingBtnShow");
