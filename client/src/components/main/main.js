@@ -16,12 +16,12 @@ class Main extends React.Component {
   //////////////////////////////////////
   /////////Button Control///////////////
   enableBtn = (btnProperty) => {
-    this.setState(btnProperty);
+    this.setState({ [btnProperty]: true }); //dynamic key
     console.log(`${JSON.stringify(btnProperty)}. Btn is enabled!`);
   };
 
   disableBtn = (btnProperty) => {
-    this.setState(btnProperty);
+    this.setState({ [btnProperty]: false }); //dymanic key
     console.log(`${JSON.stringify(btnProperty)}. Btn is disabled!`);
   };
 
@@ -39,8 +39,8 @@ class Main extends React.Component {
   handleGrab = (event) => {
     event.preventDefault();
     const that = this; // this is to keep the scopt of this.state
-    that.enableBtn({ loadingBtnShow: true });
-    that.disableBtn({ submitBtnShow: false });
+    that.enableBtn("loadingBtnShow");
+    that.disableBtn("submitBtnShow");
 
     ///////GENERATE SESSID FUNCTION /////////////
     let ranGen = () => {
@@ -83,14 +83,14 @@ class Main extends React.Component {
 
             if (res.data === true) {
               //makes below buttons show and hide
-              that.disableBtn({ loadingBtnShow: false });
-              that.enableBtn({ submitBtnShow: true });
-              that.enableBtn({ downloadBtnShow: true });
+              that.disableBtn("loadingBtnShow");
+              that.enableBtn("submitBtnShow");
+              that.enableBtn("downloadBtnShow");
               alert("your file is ready for download!");
             } else {
               console.log("something wrong");
-              that.disableBtn({ loadingBtnShow: false });
-              that.enableBtn({ submitBtnShow: true });
+              that.disableBtn("loadingBtnShow");
+              that.enableBtn("submitBtnShow");
             }
           });
         //   .fail(function (xhr, status, error) {
