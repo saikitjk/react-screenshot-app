@@ -90,6 +90,11 @@ app.post("/api/savescreenshot", async (req, res) => {
           zipFile(sessID, function (err) {
             if (err) {
               console.log(err);
+              return res.status(500).json({
+                err: err,
+                readyDl: false,
+                msg: "Internal server error. Please contact administrator.",
+              });
             } else {
               return;
             }
