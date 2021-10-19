@@ -84,7 +84,9 @@ class Main extends React.Component {
             //RECEIVE SERVER DATA HERE
             // console.log("response from server: " + JSON.stringify(res));
             // console.log("res.data: " + res.data);
-            const { readyDl } = res.data;
+            const { readyDl } = res.data; //Object destructuring
+            const { msg } = res.data; //Object destructuring
+            const { err } = res.data; //Object destructuring
             //console.log("Value of readyDl: "+readyDl);
             if (readyDl === true) {
               //makes below buttons show and hide
@@ -126,7 +128,11 @@ class Main extends React.Component {
         <Card>
           <CardTitle tag="h3">Enter URL below </CardTitle>
           <CardBody>
-            <Notification />
+            <Notification
+              displayInfoMsg={this.state.displayInfoMsg}
+              displayErrorMsg={this.state.displayErrorMsg}
+              message={this.state.msg}
+            />
             <SearchBox
               //  inputURL={this.state.url}
               handleInputChange={this.handleInputChange}
