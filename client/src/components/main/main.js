@@ -32,6 +32,22 @@ class Main extends React.Component {
   /////////Button Control///////////////
   //////////////////////////////////////
 
+  //////////////////////////////////////
+  ////////////////Display Msg///////////
+  displayDownloadMsg = (msg) => {
+    console.log("displayDownloadMsg method called");
+    this.setState({ displayInfoMsg: true });
+    this.setState({ msg: msg });
+  };
+
+  displayErrorMsg = (msg) => {
+    console.log("displayErrorMsg method called");
+    this.setState({ displayErrorMsg: true });
+    this.setState({ msg: msg });
+  };
+  ////////////////Display Msg///////////
+  //////////////////////////////////////
+
   //input box in searchBox
   handleInputChange = (event) => {
     const url = event.target.value;
@@ -93,11 +109,15 @@ class Main extends React.Component {
               that.disableBtn("loadingBtnShow");
               that.enableBtn("submitBtnShow");
               that.enableBtn("downloadBtnShow");
-              console.log("your file is ready for download!");
-            } else {
-              console.log("something wrong");
+              console.log(msg);
+              that.displayDownloadMsg(msg);
+            }
+
+            if (readyDl === false) {
+              console.log("something wrong: " + err);
               that.disableBtn("loadingBtnShow");
               that.enableBtn("submitBtnShow");
+              that.displayErrorMsg(msg);
             }
           });
         //   .fail(function (xhr, status, error) {
