@@ -1,5 +1,6 @@
 import React from "react";
 import SearchBox from "../searchBox/searchBox";
+import Notification from "../notification/notification";
 import { Card, CardTitle, CardBody } from "reactstrap";
 import axios from "axios";
 import "./main.css";
@@ -11,6 +12,9 @@ class Main extends React.Component {
     submitBtnShow: true,
     loadingBtnShow: false,
     downloadBtnShow: false,
+    displayInfoMsg: false,
+    displayErrorMsg: false,
+    msg: "",
   };
 
   //////////////////////////////////////
@@ -122,6 +126,7 @@ class Main extends React.Component {
         <Card>
           <CardTitle tag="h3">Enter URL below </CardTitle>
           <CardBody>
+            <Notification />
             <SearchBox
               //  inputURL={this.state.url}
               handleInputChange={this.handleInputChange}
