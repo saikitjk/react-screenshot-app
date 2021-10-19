@@ -6,16 +6,19 @@ import axios from "axios";
 import "./main.css";
 
 class Main extends React.Component {
-  state = {
-    url: "",
-    urlArray: [],
-    submitBtnShow: true,
-    loadingBtnShow: false,
-    downloadBtnShow: false,
-    displayInfoMsg: false,
-    displayErrorMsg: false,
-    msg: "",
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      url: "",
+      urlArray: [],
+      submitBtnShow: true,
+      loadingBtnShow: false,
+      downloadBtnShow: false,
+      displayInfoMsg: false,
+      displayErrorMsg: false,
+      msg: "",
+    };
+  }
 
   //////////////////////////////////////
   /////////Button Control///////////////
