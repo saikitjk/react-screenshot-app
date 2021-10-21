@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert } from "reactstrap";
+import { Alert, Button } from "reactstrap";
 import "./notification.css";
 
 export default function notification(props) {
@@ -7,12 +7,16 @@ export default function notification(props) {
     <div>
       <div>
         {props.displayInfoMsg ? (
-          <Alert color="info">{props.message}</Alert>
+          <Alert color="info">
+            {props.message} <Button close onClick={props.closeDownloadMsg} />
+          </Alert>
         ) : null}
       </div>
       <div>
         {props.displayErrorMsg ? (
-          <Alert color="danger">{props.message}</Alert>
+          <Alert color="danger">
+            {props.message} <Button close onClick={props.closeErrorMsg} />
+          </Alert>
         ) : null}
       </div>
     </div>
