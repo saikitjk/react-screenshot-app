@@ -165,6 +165,8 @@ class Main extends React.Component {
               displayInfoMsg={this.state.displayInfoMsg}
               displayErrorMsg={this.state.displayErrorMsg}
               message={this.state.msg}
+              closeDownloadMsg={this.closeDownloadMsg}
+              closeErrorMsg={this.closeErrorMsg}
             />
             <SearchBox
               //  inputURL={this.state.url}
