@@ -48,6 +48,16 @@ class Main extends React.Component {
     this.setState({ displayErrorMsg: true });
     this.setState({ msg: msg });
   };
+
+  closeDownloadMsg = () => {
+    console.log("Info box closed");
+    this.setState({ displayInfoMsg: false });
+  };
+
+  closeErrorMsg = () => {
+    console.log("Error box closed");
+    this.setState({ displayErrorMsg: false });
+  };
   ////////////////Display Msg///////////
   //////////////////////////////////////
 
