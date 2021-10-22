@@ -147,6 +147,9 @@ class Main extends React.Component {
         count++;
       }
     }
+    if (arrLength < 1) {
+      that.displayErrorMsg("Please enter at least 1 URL");
+    }
 
     if (arrLength > 0) {
       //make sure urlArray has URL before doNext is triggered
