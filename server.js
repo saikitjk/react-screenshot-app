@@ -91,7 +91,7 @@ app.post("/api/savescreenshot", async (req, res) => {
             err: err,
             readyDl: false,
             msg:
-              "Internal server error. Please contact the page administrator.",
+              "No file to zip. Please check URL input or contact the page admin.",
           });
         }
         // if (files.length == urlArrayToUse.length) {
