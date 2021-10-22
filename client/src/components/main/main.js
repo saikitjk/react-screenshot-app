@@ -152,6 +152,10 @@ class Main extends React.Component {
     }
 
     if (arrLength > 0) {
+      that.closeErrorMsg();
+      that.closeDownloadMsg();
+      that.enableBtn("loadingBtnShow");
+      that.disableBtn("submitBtnShow");
       //make sure urlArray has URL before doNext is triggered
       doNext();
     }
