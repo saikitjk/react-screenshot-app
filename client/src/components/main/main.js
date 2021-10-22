@@ -116,6 +116,7 @@ class Main extends React.Component {
             const { readyDl } = res.data; //Object destructuring
             const { msg } = res.data; //Object destructuring
             const { err } = res.data; //Object destructuring
+            const { fileSize } = res.data;
             //console.log("Value of readyDl: "+readyDl);
             if (readyDl === true) {
               //makes below buttons show and hide
@@ -123,7 +124,9 @@ class Main extends React.Component {
               that.enableBtn("submitBtnShow");
               that.enableBtn("downloadBtnShow");
               console.log(msg);
-              that.displayDownloadMsg(msg);
+              that.displayDownloadMsg(
+                `${msg}  Captured:(${fileSize}/${arrLength})`
+              );
             }
 
             if (readyDl === false) {

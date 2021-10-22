@@ -40,7 +40,7 @@ app.post("/api/savescreenshot", async (req, res) => {
   console.log("The amount of URLs: " + urlArray.length);
 
   try {
-    async () => {
+    (async () => {
       const cluster = await Cluster.launch({
         concurrency: Cluster.CONCURRENCY_BROWSER, //To prevent hang
         maxConcurrency: 10, //Set 10 for now, can use concurrentValue for dynamic treshold
@@ -84,34 +84,49 @@ app.post("/api/savescreenshot", async (req, res) => {
 
       const dir = "./" + sessID; //dir = sessid folder location
       fs.readdir(dir, (err, files) => {
-        console.log("File size: " + files.length); //files.length is the amount of screenshot captured in dir
-        if (files.length == urlArray.length) {
-          //if captured amount is equal to asked amount, call zipFile function to zip
+        console.log("File size: " + files.length);
+        if (files.length === 0) {
+          console.log("No file to zip");
+          return res.json({
+            err: err,
+            readyDl: false,
+            msg:
+              "Internal server error. Please contact the page administrator.",
+          });
+        }
+        // if (files.length == urlArrayToUse.length) {
+        if (files.length > 0) {
           zipFile(sessID, function (err) {
             if (err) {
-              console.log(err);
-              return res.status(500).json({
+              console.log(err); // Check error if you want
+              return res.json({
                 err: err,
                 readyDl: false,
-                msg: "Internal server error. Please contact administrator.",
+                msg:
+                  "Internal server error. Please contact the page administrator.",
               });
             } else {
               return;
             }
           });
-
-          return res
-            .status(200)
-            .json({ readyDl: true, msg: "Your file is ready for download!" });
+          return res.status(200).json({
+            readyDl: true,
+            msg: "Your file is ready for download!",
+            fileSize: files.length,
+          });
         }
       });
 
-      console.log("Completed");
-    };
+      //console.log("Completed");
+    })();
   } catch (e) {
     // catch errors and send error status
     console.log(e);
-    res.sendStatus(500);
+    res.sendStatus(500).json({
+      err: err,
+      readyDl: false,
+      msg: "Internal server error. Please contact the page administrator.",
+    });
   }
 });
 
