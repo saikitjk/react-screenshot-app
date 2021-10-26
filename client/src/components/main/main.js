@@ -3,6 +3,7 @@ import SearchBox from "../searchBox/searchBox";
 import Notification from "../notification/notification";
 import { Card, CardTitle, CardBody } from "reactstrap";
 import axios from "axios";
+import isURL from "validator/lib/isURL";
 import "./main.css";
 
 class Main extends React.Component {
