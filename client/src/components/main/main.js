@@ -156,6 +156,25 @@ class Main extends React.Component {
     }
 
     if (arrLength > 0) {
+      //Input Validation
+      for (let i = 0; i < urlArray.length; i++) {
+        if (
+          isURL(urlArray[i], {
+            protocols: ["http", "https"],
+            require_protocol: true,
+            require_tld: true,
+          })
+        ) {
+          i++;
+        } else {
+          console.log(urlArray[i] + " is not an valid URL");
+          that.displayErrorMsg(
+            urlArray[i] +
+              " does not meet the URL requirements. Please see instructions below"
+          );
+          return;
+        }
+      }
       that.closeErrorMsg();
       that.closeDownloadMsg();
       that.enableBtn("loadingBtnShow");
