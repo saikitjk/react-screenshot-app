@@ -4,6 +4,10 @@ import { FaSyncAlt, FaCameraRetro, FaDownload } from "react-icons/fa";
 import "./searchBox.css";
 
 export default function searchBox(props) {
+  const refreshPage = () => {
+    window.location.reload(true);
+    console.log("Page reloaded!");
+  };
   return (
     <div>
       <FormGroup>
@@ -20,7 +24,8 @@ export default function searchBox(props) {
       <div className="text-right">
         {/* reset button */}
         <Button
-          onClick={props.handleReset}
+          // onClick={props.handleReset}
+          onClick={refreshPage}
           color="primary"
           className="resetBtn"
           type="submit"
