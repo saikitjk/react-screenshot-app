@@ -184,6 +184,8 @@ class Main extends React.Component {
     }
   };
 
+  handleDl = () => {};
+
   render() {
     console.log("What is in the state object: " + this.state);
     return (
@@ -205,6 +207,7 @@ class Main extends React.Component {
               submitBtnShow={this.submitBtnShow}
               loadingBtnShow={this.state.loadingBtnShow}
               downloadBtnShow={this.state.downloadBtnShow}
+              handleDl={this.handleDl.bind(this)}
             />
           </CardBody>
         </Card>
