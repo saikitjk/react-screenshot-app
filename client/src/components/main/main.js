@@ -183,8 +183,23 @@ class Main extends React.Component {
       doNext();
     }
   };
+  //download button
+  handleDl = () => {
+    const that = this;
+    const result = true;
+    const url = "http://localhost:3001/api/download";
+    const requestOptions = {
+      method: "POST",
+      responseType: "arraybuffer",
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
 
-  handleDl = () => {};
+      data: {
+        test: result,
+      },
+    };
+  };
 
   render() {
     console.log("What is in the state object: " + this.state);
