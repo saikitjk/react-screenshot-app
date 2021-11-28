@@ -199,6 +199,12 @@ class Main extends React.Component {
         test: result,
       },
     };
+
+    function downloadFile() {
+      fetch(url, requestOptions).then((res) => res.blob());
+    }
+
+    downloadFile();
   };
 
   render() {
