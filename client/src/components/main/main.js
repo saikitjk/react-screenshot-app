@@ -201,7 +201,19 @@ class Main extends React.Component {
     };
 
     function downloadFile() {
-      fetch(url, requestOptions).then((res) => res.blob());
+      fetch(url, requestOptions)
+        .then((res) => res.blob())
+        .then((resBlob) => {
+          console.log("what is in res.data: " + JSON.stringify(resBlob));
+
+          const downloadUrl = window.URL.createObjectURL(new Blob([resBlob]));
+          const link = document.createElement("a");
+          link.href = downloadUrl;
+          link.setAttribute("download", "screenshots.zip");
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+        });
     }
 
     downloadFile();
