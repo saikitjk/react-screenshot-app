@@ -204,7 +204,7 @@ class Main extends React.Component {
       fetch(url, requestOptions)
         .then((res) => res.blob())
         .then((resBlob) => {
-          console.log("what is in res.data: " + JSON.stringify(resBlob));
+          //console.log("what is in res.data: " + JSON.stringify(resBlob));
 
           const downloadUrl = window.URL.createObjectURL(new Blob([resBlob]));
           const link = document.createElement("a");
@@ -213,7 +213,9 @@ class Main extends React.Component {
           document.body.appendChild(link);
           link.click();
           link.remove();
-        });
+          that.disableBtn("downloadBtnShow");
+        })
+        .catch((err) => console.log(err));
     }
 
     downloadFile();
