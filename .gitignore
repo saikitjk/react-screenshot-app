@@ -116,7 +116,7 @@ dist
 .pnp.*
 
 #images
-*.png
+
 
 #zip
 *.zip
