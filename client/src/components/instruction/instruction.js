@@ -5,6 +5,12 @@ import ThumbnailGrid from "./thumbnailGallery/thumbnailGrid";
 import TextArea from "./thumbnailGallery/textArea";
 
 class Instruction extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      thumbnails: {},
+    };
+  }
   render() {
     return (
       <div className="instructionFlexbox-container">
