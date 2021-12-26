@@ -18,10 +18,11 @@ class Instruction extends React.Component {
     this.setState({ thumbnails: InstructionData });
   }
   render() {
+    const { thumbnails } = this.state;
     return (
       <div className="instructionFlexbox-container">
         <div className="flexbox-item-left">
-          <ActiveThumbnailWindow />
+          <ActiveThumbnailWindow activeThumbnail={thumbnails[0]} />
           <ThumbnailGrid />
         </div>
         <div className="flexbox-item-right">
