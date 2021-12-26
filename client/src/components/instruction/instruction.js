@@ -17,12 +17,20 @@ class Instruction extends React.Component {
     //mount instruction data at the beginning for it to load
     this.setState({ thumbnails: InstructionData });
   }
-  render() {
+
+  renderThumbnails = () => {
+    //this is make sure the render starts after the component is loaded
     const { thumbnails } = this.state;
+    if (thumbnails.length) {
+      return <ActiveThumbnailWindow activeThumbnail={thumbnails[0]} />;
+    }
+    return null;
+  };
+  render() {
     return (
       <div className="instructionFlexbox-container">
         <div className="flexbox-item-left">
-          <ActiveThumbnailWindow activeThumbnail={thumbnails[0]} />
+          {this.renderThumbnails}
           <ThumbnailGrid />
         </div>
         <div className="flexbox-item-right">
