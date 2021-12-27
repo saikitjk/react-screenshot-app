@@ -5,11 +5,13 @@ import Four from "../assets/four.png";
 
 const instructionData = [
   {
+    itemIndex: "1",
     pic: One,
     desc1: "Enter the URLs as shown in the screenshot",
     desc2: "IMPORTANT: URL must include https and end with a forward slash (/)",
   },
   {
+    itemIndex: "2",
     pic: Two,
     desc1:
       "When all the URLs are ready, click 'Grab Screenshots'. You should see 'Processing. Please wait...'",
@@ -18,6 +20,7 @@ const instructionData = [
   },
 
   {
+    itemIndex: "3",
     pic: Three,
     desc1:
       "When all the screenshots have been processed, you will see an alert on your browser window",
@@ -25,6 +28,7 @@ const instructionData = [
   },
 
   {
+    itemIndex: "4",
     pic: Four,
     desc1:
       "A new 'Download file' button will appear. Click on it to download your zip file",
