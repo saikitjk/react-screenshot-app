@@ -4,6 +4,7 @@ import ActiveThumbnailWindow from "./thumbnailGallery/activeThumbnailWindow";
 import ThumbnailGrid from "./thumbnailGallery/thumbnailGrid";
 import TextArea from "./thumbnailGallery/textArea";
 import InstructionData from "./utils/instructionData";
+import { Row, Container, Col } from "reactstrap";
 
 class Instruction extends React.Component {
   constructor(props) {
@@ -40,18 +41,27 @@ class Instruction extends React.Component {
   render() {
     const { thumbnails } = this.state;
     return (
-      <div className="instructionFlexbox-container">
-        <div className="flexbox-item-left">
-          {this.renderThumbnails}
-          <ThumbnailGrid
-            standbyThumbnails={thumbnails}
-            handleClick={this.handleClick}
-          />
-        </div>
-        <div className="flexbox-item-right">
-          <TextArea />
-        </div>
-      </div>
+      <Container>
+        <Row>
+          <Col>
+            <h4 className="instructionTitle">Instructions</h4>
+          </Col>
+        </Row>
+        <Row>
+          <div className="instructionFlexbox-container">
+            <div className="flexbox-item-left">
+              {this.renderThumbnails}
+              <ThumbnailGrid
+                standbyThumbnails={thumbnails}
+                handleClick={this.handleClick}
+              />
+            </div>
+            <div className="flexbox-item-right">
+              <TextArea />
+            </div>
+          </div>
+        </Row>
+      </Container>
     );
   }
 }
