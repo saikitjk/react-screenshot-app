@@ -10,6 +10,7 @@ class Instruction extends React.Component {
     super(props);
     this.state = {
       thumbnails: {},
+      activeIndex: 0,
     };
   }
 
@@ -20,9 +21,11 @@ class Instruction extends React.Component {
 
   renderThumbnails = () => {
     //this is make sure the render starts after the component is loaded
-    const { thumbnails } = this.state;
+    const { thumbnails, activeIndex } = this.state;
     if (thumbnails.length) {
-      return <ActiveThumbnailWindow activeThumbnail={thumbnails[0]} />;
+      return (
+        <ActiveThumbnailWindow activeThumbnail={thumbnails[activeIndex]} />
+      );
     }
     return null;
   };
