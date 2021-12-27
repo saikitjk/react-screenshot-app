@@ -35,7 +35,7 @@ class Instruction extends React.Component {
       <div className="instructionFlexbox-container">
         <div className="flexbox-item-left">
           {this.renderThumbnails}
-          <ThumbnailGrid standbyThumbnail={thumbnails} />
+          <ThumbnailGrid standbyThumbnails={thumbnails} />
         </div>
         <div className="flexbox-item-right">
           <TextArea />
