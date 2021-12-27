@@ -29,13 +29,20 @@ class Instruction extends React.Component {
     }
     return null;
   };
+
+  handleClick = () => {
+    console.log("handleClick");
+  };
   render() {
     const { thumbnails } = this.state;
     return (
       <div className="instructionFlexbox-container">
         <div className="flexbox-item-left">
           {this.renderThumbnails}
-          <ThumbnailGrid standbyThumbnails={thumbnails} />
+          <ThumbnailGrid
+            standbyThumbnails={thumbnails}
+            handleClick={this.handleClick}
+          />
         </div>
         <div className="flexbox-item-right">
           <TextArea />
