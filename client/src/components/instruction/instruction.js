@@ -30,9 +30,12 @@ class Instruction extends React.Component {
     return null;
   };
 
-  handleClick = () => {
-    console.log("handleClick");
+  handleClick = (e) => {
+    //console.log("handleClick");
+    const newActiveIndex = e.target.getAttribute("data-index");
+    console.log(newActiveIndex);
   };
+
   render() {
     const { thumbnails } = this.state;
     return (
