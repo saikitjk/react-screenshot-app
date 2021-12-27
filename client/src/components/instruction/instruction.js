@@ -34,6 +34,7 @@ class Instruction extends React.Component {
     //console.log("handleClick");
     const newActiveIndex = e.target.getAttribute("data-index");
     console.log(newActiveIndex);
+    this.setState({ activeIndex: newActiveIndex });
   };
 
   render() {
