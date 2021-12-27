@@ -7,7 +7,7 @@ export default function thumbnailGrid(standbyThumbnails) {
   return (
     <div className="thumbnailGrid">
       {standbyThumbnails.map((thumbnailItem) => {
-        return <Thumbnail key={thumbnailItem.pic} image={thumbnailItem.pic} />;
+        return <Thumbnail key={thumbnailItem.pic} image={thumbnailItem} />;
       })}
     </div>
   );
