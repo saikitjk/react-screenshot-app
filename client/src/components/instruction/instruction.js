@@ -21,12 +21,21 @@ class Instruction extends React.Component {
   }
 
   renderThumbnails = () => {
-    //this is make sure the render starts after the component is loaded
+    //this is make sure the active thumbnail rendering starts after the component is loaded
     const { thumbnails, activeIndex } = this.state;
     if (thumbnails.length) {
       return (
         <ActiveThumbnailWindow activeThumbnail={thumbnails[activeIndex]} />
       );
+    }
+    return null;
+  };
+
+  renderText = () => {
+    //this is make sure the text rendering starts after the component is loaded
+    const { thumbnails, activeIndex } = this.state;
+    if (thumbnails.length) {
+      return <TextArea activeText={thumbnails[activeIndex]} />;
     }
     return null;
   };
@@ -56,9 +65,7 @@ class Instruction extends React.Component {
                 handleClick={this.handleClick}
               />
             </div>
-            <div className="flexbox-item-right">
-              <TextArea />
-            </div>
+            <div className="flexbox-item-right">{this.renderText}</div>
           </div>
         </Row>
       </Container>
