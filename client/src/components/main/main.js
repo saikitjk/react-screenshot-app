@@ -102,7 +102,8 @@ class Main extends React.Component {
         axios
           .request({
             method: "POST",
-            url: "http://localhost:3001/api/savescreenshot",
+            //url: "http://localhost:3001/api/savescreenshot",
+            url: "/api/savescreenshot",
             header: { "Content-Type": "x-www-form-urlencoded" },
             data: {
               arrLength: arrLength,
@@ -182,7 +183,8 @@ class Main extends React.Component {
   handleDl = () => {
     const that = this;
     const result = true;
-    const url = "http://localhost:3001/api/download";
+    //const url = "http://localhost:3001/api/download";
+    const url = "/api/download";
     const requestOptions = {
       method: "POST",
       responseType: "arraybuffer",
