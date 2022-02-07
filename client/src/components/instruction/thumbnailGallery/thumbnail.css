@@ -1,4 +1,12 @@
 .thumbnail {
   height: 50%;
   width: 50%;
+  position: relative;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.img {
+  widows: 100%;
+  height: 100%;
 }
