@@ -178,7 +178,6 @@ class Main extends React.Component {
   };
   //download button
   handleDl = () => {
-    console.log("avc");
     const that = this;
     const result = true;
 
@@ -198,10 +197,10 @@ class Main extends React.Component {
     function downloadFile() {
       fetch(url, requestOptions)
         .then((res) => res.blob())
-        .then((resBlob) => {
-          //console.log("what is in res.data: " + JSON.stringify(resBlob));
+        .then((myblob) => {
+          console.log("what is in res.data: " + JSON.stringify(myblob));
 
-          const downloadUrl = window.URL.createObjectURL(new Blob([resBlob]));
+          const downloadUrl = window.URL.createObjectURL(new Blob([myblob]));
           const link = document.createElement("a");
           link.href = downloadUrl;
           link.setAttribute("download", "screenshots.zip");

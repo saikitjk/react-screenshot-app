@@ -2,7 +2,6 @@
 // =============================================================
 const express = require("express");
 const path = require("path");
-const puppeteer = require("puppeteer");
 const { Cluster } = require("puppeteer-cluster");
 const fs = require("fs");
 
@@ -13,16 +12,18 @@ var PORT = process.env.PORT || 3000;
 var cors = require("cors");
 
 // Sets up the Express app to handle data parsing
+const publicPath = path.join(__dirname, "..", "public");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(__dirname + "/src"));
+app.use(express.static(publicPath));
+app.use(cors());
 
 // Routes
 // =============================================================
 
 // Basic route that sends the user first to the AJAX Page
 app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(__dirname, "./client/public/index.html"));
 });
 
 app.post("/api/savescreenshot", async (req, res) => {
