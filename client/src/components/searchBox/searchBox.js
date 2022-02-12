@@ -3,11 +3,11 @@ import { FormGroup, Input, Button } from "reactstrap";
 import { FaSyncAlt, FaCameraRetro, FaDownload } from "react-icons/fa";
 import "./searchBox.css";
 
-export default function searchBox(props) {
-  const refreshPage = () => {
+const SearchBox = (props) => {
+  function refreshPage() {
     window.location.reload(true);
     console.log("Page reloaded!");
-  };
+  }
   return (
     <div>
       <FormGroup>
@@ -78,4 +78,5 @@ export default function searchBox(props) {
       </div>
     </div>
   );
-}
+};
+export default SearchBox;
