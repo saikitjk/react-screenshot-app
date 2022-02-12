@@ -165,13 +165,15 @@ function zipFile(sessID) {
   }
 
   let data = zip.generate({ base64: false, compression: "DEFLATE" }); //generate the zip file data
-
   fs.promises
-    .mkdir(__dirname + "/temp/", { recursive: true })
+    .mkdir(__dirname + "/temporary/", { recursive: true })
     .catch(console.error);
 
   //write the data to file
-  fs.writeFile(__dirname + "/temp/" + zipName, data, "binary", function (err) {
+  fs.writeFile(__dirname + "/temporary/" + zipName, data, "binary", function (
+    err
+  ) {
+    //console.log("1. " + __dirname);
     if (err) {
       console.log("triggered: " + err);
     } else {
@@ -180,7 +182,9 @@ function zipFile(sessID) {
           throw err;
         }
 
-        console.log(`${someDir} is deleted!`);
+        console.log(
+          "Screenshots are zipped and the original image files are deleted!"
+        );
       });
     }
   });

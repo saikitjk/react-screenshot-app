@@ -14,7 +14,7 @@ class Main extends React.Component {
       urlArray: [],
       submitBtnShow: true,
       loadingBtnShow: false,
-      downloadBtnShow: false,
+      downloadBtnShow: true,
       displayInfoMsg: false,
       displayErrorMsg: false,
       msg: "",
@@ -100,7 +100,6 @@ class Main extends React.Component {
         axios
           .request({
             method: "POST",
-            //url: "http://localhost:3001/api/savescreenshot",
             url: "/api/savescreenshot",
             header: { "Content-Type": "x-www-form-urlencoded" },
             data: {
@@ -181,7 +180,7 @@ class Main extends React.Component {
   handleDl = () => {
     const that = this;
     const result = true;
-    //const url = "http://localhost:3001/api/download";
+
     const url = "/api/download";
     const requestOptions = {
       method: "POST",
