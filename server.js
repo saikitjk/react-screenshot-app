@@ -9,7 +9,7 @@ const fs = require("fs");
 // Sets up the Express App
 // =============================================================
 var app = express();
-var PORT = process.env.PORT || 5000;
+var PORT = process.env.PORT || 3000;
 var cors = require("cors");
 
 // Sets up the Express app to handle data parsing
@@ -31,13 +31,11 @@ app.post("/api/savescreenshot", async (req, res) => {
   const { arrLength } = req.body;
   var concurrenyValue = parseInt(arrLength); //this is for dynamic concyrrency value
   //convert urlList in req.body into an array
-  for (var urlList in req.body) {
-    if (req.body.hasOwnProperty("urlList")) {
-      var urlArray = req.body[urlList];
+  for (var urlArray in req.body) {
+    if (req.body.hasOwnProperty("urlArray")) {
+      var urlArrayToUse = req.body[urlArray];
     }
   }
-
-  console.log("The amount of URLs: " + urlArray.length);
 
   try {
     (async () => {
@@ -65,7 +63,7 @@ app.post("/api/savescreenshot", async (req, res) => {
       });
 
       //use the urlArray into the cluster queue and create dir
-      for (let i = 0; i < urlArray.length; i++) {
+      for (let i = 0; i < urlArrayToUse.length; i++) {
         if (i === 0) {
           fs.mkdir(path.join(__dirname, sessID), (err) => {
             if (err) {
@@ -75,7 +73,7 @@ app.post("/api/savescreenshot", async (req, res) => {
           });
         }
 
-        cluster.queue(urlArray[i]);
+        cluster.queue(urlArrayToUse[i]);
       }
       await cluster.idle();
       await cluster.close();

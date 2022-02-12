@@ -73,8 +73,6 @@ class Main extends React.Component {
   handleGrab = (event) => {
     event.preventDefault();
     const that = this; // this is to keep the scopt of this.state
-    that.enableBtn("loadingBtnShow");
-    that.disableBtn("submitBtnShow");
 
     ///////GENERATE SESSID FUNCTION /////////////
     let ranGen = () => {
@@ -224,7 +222,7 @@ class Main extends React.Component {
   };
 
   render() {
-    console.log("What is in the state object: " + this.state);
+    console.log(this.state);
     return (
       <div>
         <Card>
@@ -239,9 +237,9 @@ class Main extends React.Component {
             />
             <SearchBox
               //  inputURL={this.state.url}
-              handleInputChange={this.handleInputChange}
-              handleGrab={this.handleGrab}
-              submitBtnShow={this.submitBtnShow}
+              handleInputChange={this.handleInputChange.bind(this)}
+              handleGrab={this.handleGrab.bind(this)}
+              submitBtnShow={this.state.submitBtnShow}
               loadingBtnShow={this.state.loadingBtnShow}
               downloadBtnShow={this.state.downloadBtnShow}
               handleDl={this.handleDl.bind(this)}
