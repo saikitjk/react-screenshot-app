@@ -65,7 +65,7 @@ const SearchBox = (props) => {
         {/* download button */}
         {props.downloadBtnShow ? (
           <Button
-            onClick={props.handleDL}
+            onClick={props.handleDl}
             color="primary"
             className="dlBtn"
             type="submit"

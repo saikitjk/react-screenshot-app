@@ -178,6 +178,7 @@ class Main extends React.Component {
   };
   //download button
   handleDl = () => {
+    console.log("avc");
     const that = this;
     const result = true;
 
