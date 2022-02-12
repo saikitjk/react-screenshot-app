@@ -128,23 +128,24 @@ app.post("/api/savescreenshot", async (req, res) => {
   }
 });
 
-app.get("/api/download", function (req, res) {
-  // var result = req.body.data
-  // console.log("result"+result)
-  const file = __dirname + "/temp/screenshots.zip";
+app.post("/api/download", function (req, res) {
+  // const { test } = req.body;
+  console.log("I am triggered");
+  const file = __dirname + "/temporary/screenshots.zip";
+  //console.log(fs.existsSync(file));
+  if (fs.existsSync(file) === false) {
+    return res.status(404).json({ msg: "no such file or directory" });
+  }
   res.download(file, "screenshots.zip", function (err) {
     if (err) {
       console.log(err); // Check error if you want
+      return res.json({ err: err });
     } else {
       fs.unlink(file, function () {
         console.log("File was deleted"); // Callback
       });
     }
-  }); // Set disposition and send it.
-  // res.download(path.join(__dirname, "/" + result + "/screenshots.zip"))
-  // res.download("../" + "0098" + '/screenshots.zip', function(error){
-  //     console.log("Error : ", error)
-  // });
+  });
 });
 
 function zipFile(sessID) {
