@@ -14,7 +14,7 @@ class Main extends React.Component {
       urlArray: [],
       submitBtnShow: true,
       loadingBtnShow: false,
-      downloadBtnShow: true,
+      downloadBtnShow: false,
       displayInfoMsg: false,
       displayErrorMsg: false,
       msg: "",
