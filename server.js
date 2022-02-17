@@ -43,7 +43,7 @@ app.post("/api/savescreenshot", async (req, res) => {
       const cluster = await Cluster.launch({
         concurrency: Cluster.CONCURRENCY_BROWSER, //To prevent hang
         maxConcurrency: 10, //Set 10 for now, can use concurrentValue for dynamic treshold
-        workerCreationDelay: 200, //to prevent max cpu at the start
+        workerCreationDelay: 200, //to prevent max cpu/ network at the start
         monitor: true, //enable stats on the backend for visibility
         headless: true,
         timeout: 600000,

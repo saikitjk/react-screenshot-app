@@ -15,9 +15,14 @@
   },
   "devDependencies": {},
   "scripts": {
+    "client": "cd client && npm run start",
+    "dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "watch": "nodemon server.js"
+    "watch": "nodemon server.js",
+    "start:prod": "",
+    "install": "cd client && npm install && npm run build && cd ..",
+    "build": "cd client && npm run build"
   },
   "author": "",
   "license": "ISC"
