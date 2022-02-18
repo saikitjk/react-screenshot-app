@@ -22,8 +22,12 @@ app.use(cors());
 // =============================================================
 
 // Basic route that sends the user first to the AJAX Page
+// app.get("/", function (req, res) {
+//   res.sendFile(path.join(__dirname, "./client/public/index.html"));
+// });
+
 app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "./client/public/index.html"));
+  res.sendFile(path.join(publicPath, "index.html"));
 });
 
 app.post("/api/savescreenshot", async (req, res) => {
