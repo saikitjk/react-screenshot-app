@@ -15,16 +15,20 @@ var cors = require("cors");
 //const publicPath = path.join(__dirname, "..", "public");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "client", "build")));
 app.use(cors());
 
 // Routes
 // =============================================================
 
 // Basic route that sends the user first to the AJAX Page
-app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "public"));
-});
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+
+  app.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname, "public"));
+  });
+}
 
 app.post("/api/savescreenshot", async (req, res) => {
   //req carry arrLength,sessID,urlList from frontend
