@@ -84,12 +84,12 @@ class Main extends React.Component {
 
     var sessID = ranGen();
     var arrLength = this.state.urlArray.length;
-    var urlArray = this.state.urlArray; //variable in handlegrab that takes from state object properties
+    var urlArrayRaw = this.state.urlArray; //variable in handlegrab that takes from state object properties
 
     //CONSOLE LOG FIELD
     console.log("sessID after hitting the grab button: " + sessID);
     console.log(
-      "urlArray in stateObject after hitting grab button: " + urlArray
+      "urlArray in stateObject after hitting grab button: " + urlArrayRaw
     );
     console.log("Array length: " + arrLength);
     //CONSOLE LOG FIELD
@@ -150,15 +150,23 @@ class Main extends React.Component {
 
     if (arrLength > 0) {
       //Input Validation
-      for (let i = 0; i < urlArray.length; i++) {
+      var urlArray = [];
+      for (let i = 0; i < urlArrayRaw.length; ) {
         if (
-          isURL(urlArray[i], {
+          isURL(urlArrayRaw[i], {
             protocols: ["http", "https"],
-            require_protocol: true,
+            require_protocol: false, //this check if input has protocol, set to false to allow user enter url without https://
             require_tld: true,
           })
         ) {
-          i++;
+          urlArray.push(urlArrayRaw[i].toLowerCase()); //convert all element in urlArrayRaw to lowercase
+          //check if they have https:// and add / at the end
+          if (urlArray[i].indexOf("https://") === -1) {
+            urlArray[i] = "https://" + urlArrayRaw[i] + "/";
+            console.log(urlArray[i]);
+
+            i++;
+          }
         } else {
           console.log(urlArray[i] + " is not an valid URL");
           that.displayErrorMsg(
