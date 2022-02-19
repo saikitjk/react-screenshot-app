@@ -168,9 +168,9 @@ class Main extends React.Component {
             i++;
           }
         } else {
-          console.log(urlArray[i] + " is not an valid URL");
+          console.log(urlArrayRaw[i] + " is not an valid URL");
           that.displayErrorMsg(
-            urlArray[i] +
+            urlArrayRaw[i] +
               " does not meet the URL requirements. Please see instructions below"
           );
           return;
