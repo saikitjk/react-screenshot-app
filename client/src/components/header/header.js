@@ -7,7 +7,11 @@ export default function header() {
     <div>
       <Jumbotron>
         <h1>Screenshot App</h1>
-        <h3>Capture screenshot of any URL</h3>
+        <h3>Capture screenshot of any website</h3>
+        <h6>
+          Note: This tool may not be able to capture websites that has CAPTCHAs
+          enabled
+        </h6>
         <hr></hr>
       </Jumbotron>
     </div>
