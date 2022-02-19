@@ -17,7 +17,7 @@ const SearchBox = (props) => {
           type="textarea"
           name="text"
           id="exampleText"
-          placeholder="URL must starts with https:// and end with /&#10;ex. https://www.google.com/"
+          placeholder="Please make sure one line one URL."
         />
       </FormGroup>
 

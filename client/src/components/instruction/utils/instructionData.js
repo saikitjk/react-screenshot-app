@@ -9,7 +9,7 @@ const instructionData = [
     pic: One,
     title: "Step 1",
     desc1:
-      "Enter the URLs as shown in the screenshot. \nIMPORTANT: URL must include https and end with a forward slash (/).",
+      "Enter the URLs as shown in the screenshot. Make sure one line one URL",
     desc2: "",
   },
   {

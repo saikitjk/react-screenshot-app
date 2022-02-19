@@ -162,7 +162,7 @@ class Main extends React.Component {
           urlArray.push(urlArrayRaw[i].toLowerCase()); //convert all element in urlArrayRaw to lowercase
           //check if they have https:// and add / at the end
           if (urlArray[i].indexOf("https://") === -1) {
-            urlArray[i] = "https://" + urlArrayRaw[i] + "/";
+            urlArray[i] = "https://" + urlArray[i] + "/";
             console.log(urlArray[i]);
 
             i++;
