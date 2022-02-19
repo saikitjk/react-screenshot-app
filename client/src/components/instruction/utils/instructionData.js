@@ -9,7 +9,7 @@ const instructionData = [
     pic: One,
     title: "Step 1",
     desc1:
-      "Enter the URLs as shown in the screenshot. \nIMPORTANT: URL must include https and end with a forward slash (/)",
+      "Enter the URLs as shown in the screenshot. \nIMPORTANT: URL must include https and end with a forward slash (/).",
     desc2: "",
   },
   {
@@ -26,7 +26,7 @@ const instructionData = [
     pic: Three,
     title: "Step 3",
     desc1:
-      "When all the screenshots have been processed, you will see an alert on your browser window",
+      "When all the screenshots have been processed, you will see an alert on your browser window.",
     desc2: "",
   },
 

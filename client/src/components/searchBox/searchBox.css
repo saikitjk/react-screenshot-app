@@ -13,3 +13,7 @@
 .dlBtn {
   margin: 2px;
 }
+
+::placeholder {
+  font-size: 14px;
+}
