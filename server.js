@@ -49,8 +49,11 @@ app.post("/api/savescreenshot", async (req, res) => {
         maxConcurrency: 10, //Set 10 for now, can use concurrentValue for dynamic treshold
         workerCreationDelay: 200, //to prevent max cpu/ network at the start
         monitor: true, //enable stats on the backend for visibility
-        headless: true,
         timeout: 600000,
+        puppeteerOptions: {
+          headless: true,
+          args: ["--no-sandbox"],
+        },
       });
 
       cluster.on("taskerror", (err, data) => {
