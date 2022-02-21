@@ -73,7 +73,8 @@ class Main extends React.Component {
   handleGrab = (event) => {
     event.preventDefault();
     const that = this; // this is to keep the scopt of this.state
-
+    that.closeErrorMsg();
+    that.closeDownloadMsg();
     ///////GENERATE SESSID FUNCTION /////////////
     let ranGen = () => {
       return Math.floor((1 + Math.random()) * 0x10000)
@@ -149,6 +150,8 @@ class Main extends React.Component {
       }
     }
     if (arrLength < 1) {
+      that.closeErrorMsg();
+      that.closeDownloadMsg();
       that.displayErrorMsg("Please enter at least 1 URL");
     }
 
