@@ -83,15 +83,19 @@ class Main extends React.Component {
     ///////GENERATE SESSID FUNCTION /////////////
 
     var sessID = ranGen();
-    var arrLength = this.state.urlArray.length;
     var urlArrayRaw = this.state.urlArray; //variable in handlegrab that takes from state object properties
-
+    if (urlArrayRaw === null) {
+      var arrLength = 0;
+    } else {
+      arrLength = urlArrayRaw.length;
+    }
     //CONSOLE LOG FIELD
     console.log("sessID after hitting the grab button: " + sessID);
     console.log(
       "urlArray in stateObject after hitting grab button: " + urlArrayRaw
     );
     console.log("Array length: " + arrLength);
+
     //CONSOLE LOG FIELD
 
     function doNext(count = 0) {

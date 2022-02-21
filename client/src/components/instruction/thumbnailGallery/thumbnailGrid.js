@@ -3,7 +3,7 @@ import "./thumbnailGrid.css";
 import Thumbnail from "./thumbnail";
 
 export default function thumbnailGrid({ standbyThumbnails, handleClick }) {
-  console.log(standbyThumbnails); //check prop
+  //console.log(standbyThumbnails); //check prop
   return (
     <div className="thumbnailGrid">
       {standbyThumbnails.map((thumbnailItem, i) => {
