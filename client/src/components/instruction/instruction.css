@@ -5,15 +5,19 @@
   background-color: #e9ecef;
   border-radius: 0.3rem;
   display: flex;
-  height: 800px;
+
+  flex-direction: column;
 }
 
-.flexbox-item-left {
-  flex: 2;
+.flexbox-item-top {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
 }
 
-.flexbox-item-right {
-  flex: 1;
+.flexbox-item-bottom {
+  display: flex;
+  flex-direction: column;
 }
 
 .instructionTitle {

@@ -17,3 +17,33 @@
 ::placeholder {
   font-size: 14px;
 }
+
+@media (max-width: 600px) {
+  .resetBtn {
+    margin: 1.5px;
+    max-width: 18vw;
+    font-size: 3.5vw;
+    padding: 1vw;
+  }
+
+  .saveBtn {
+    margin: 1.5px 1.5px 1.5px 0px;
+    max-width: 35vw;
+    font-size: 3.5vw;
+    padding: 1vw;
+  }
+
+  .loadBtn {
+    margin: 1.5px 1.5px 1.5px 0px;
+    max-width: 35vw;
+    font-size: 3.5vw;
+    padding: 1vw;
+  }
+
+  .dlBtn {
+    margin: 1.5px 1.5px 1.5px 0px;
+    max-width: 35vw;
+    font-size: 3.5vw;
+    padding: 1vw;
+  }
+}

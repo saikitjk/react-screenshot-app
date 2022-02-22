@@ -1,5 +1,29 @@
 .media {
-  padding-top: 50px;
-  margin-left: 20px;
+  height: 100%;
   text-align: left;
+}
+
+h5 {
+  margin-bottom: 0.5rem;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  color: inherit;
+  font-size: 2vw;
+}
+
+@media (max-width: 600px) {
+  h5 {
+    margin-bottom: 0.5rem;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.2;
+    color: inherit;
+    font-size: 4vw;
+  }
+
+  .media {
+    height: 100%;
+    font-size: 3.5vw;
+  }
 }

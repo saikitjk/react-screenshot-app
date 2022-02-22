@@ -40,7 +40,7 @@ const SearchBox = (props) => {
           <Button
             onClick={props.handleGrab}
             color="primary"
-            className="savetBtn"
+            className="saveBtn"
             type="submit"
             id="save-btn"
           >

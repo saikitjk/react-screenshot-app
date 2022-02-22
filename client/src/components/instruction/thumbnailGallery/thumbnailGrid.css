@@ -1,8 +1,9 @@
 .thumbnailGrid {
-  height: 35%;
+  height: 90%;
   width: 100%;
-  background: white;
+  margin-left: 10px;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  flex-wrap: nowrap;
   border-radius: 0.3rem;
 }

@@ -1,6 +1,6 @@
 .thumbnail {
   height: 50%;
-  width: 50%;
+  width: 100%;
   position: relative;
   border: 1px solid black;
   border-radius: 5px;
