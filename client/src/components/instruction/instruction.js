@@ -4,7 +4,8 @@ import ActiveThumbnailWindow from "./thumbnailGallery/activeThumbnailWindow";
 import ThumbnailGrid from "./thumbnailGallery/thumbnailGrid";
 import TextArea from "./thumbnailGallery/textArea";
 import InstructionData from "./utils/instructionData";
-import { Row, Container, Col } from "reactstrap";
+import { Row, Container, Col, Button } from "reactstrap";
+import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 
 class Instruction extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class Instruction extends React.Component {
     this.state = {
       thumbnails: [],
       activeIndex: 0,
+      instructionDisplayToggle: false,
     };
   }
 
@@ -48,6 +50,14 @@ class Instruction extends React.Component {
     this.setState({ activeIndex: newActiveIndex });
   };
 
+  instructionClick() {
+    console.log("clicked");
+    this.setState({
+      instructionDisplayToggle: !this.state.instructionDisplayToggle, //
+    });
+    console.log(this.state);
+  }
+
   render() {
     const { thumbnails } = this.state;
     //console.log("here3: " + JSON.stringify(thumbnails[0]));
@@ -55,21 +65,37 @@ class Instruction extends React.Component {
       <Container>
         <Row>
           <Col>
-            <h4 className="instructionTitle">Instructions</h4>
+            {this.state.instructionDisplayToggle ? (
+              <Button
+                className="instructionButton"
+                onClick={this.instructionClick.bind(this)}
+              >
+                <FaCaretDown /> Instructions <FaCaretDown />
+              </Button>
+            ) : (
+              <Button
+                className="instructionButton"
+                onClick={this.instructionClick.bind(this)}
+              >
+                <FaCaretUp /> Instructions <FaCaretUp />
+              </Button>
+            )}
           </Col>
         </Row>
         <Row>
-          <div className="instructionFlexbox-container">
-            <div className="flexbox-item-top">
-              {this.renderThumbnails()}
-              <ThumbnailGrid
-                standbyThumbnails={thumbnails}
-                handleClick={this.handleClick}
-              />
-            </div>
+          {this.state.instructionDisplayToggle ? (
+            <div className="instructionFlexbox-container">
+              <div className="flexbox-item-top">
+                {this.renderThumbnails()}
+                <ThumbnailGrid
+                  standbyThumbnails={thumbnails}
+                  handleClick={this.handleClick}
+                />
+              </div>
 
-            <div className="flexbox-item-bottom">{this.renderText()}</div>
-          </div>
+              <div className="flexbox-item-bottom">{this.renderText()}</div>
+            </div>
+          ) : null}
         </Row>
       </Container>
     );
