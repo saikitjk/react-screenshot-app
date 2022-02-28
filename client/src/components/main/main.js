@@ -161,25 +161,35 @@ class Main extends React.Component {
       for (let i = 0; i < urlArrayRaw.length; ) {
         if (
           isURL(urlArrayRaw[i], {
-            protocols: ["http", "https"],
+            protocols: ["https"],
             require_protocol: false, //this check if input has protocol, set to false to allow user enter url without https://
             require_tld: true,
           })
         ) {
           urlArray.push(urlArrayRaw[i].toLowerCase()); //convert all element in urlArrayRaw to lowercase
+
           //check if they have https:// and add / at the end
           if (urlArray[i].indexOf("https://") === -1) {
             urlArray[i] = "https://" + urlArray[i] + "/";
             console.log(urlArray[i]);
-
-            i++;
           }
+          i++;
         } else {
           console.log(urlArrayRaw[i] + " is not an valid URL");
-          that.displayErrorMsg(
-            urlArrayRaw[i] +
-              " does not meet the URL requirements. Please see instructions below"
-          );
+
+          //reject http
+          if (urlArrayRaw.indexOf("http://")) {
+            console.log(urlArrayRaw[i] + " is using http protocol");
+            that.displayErrorMsg(
+              urlArrayRaw[i] +
+                " is using HTTP protocol. Please use URL that is HTTPS protocol."
+            );
+          } else {
+            that.displayErrorMsg(
+              urlArrayRaw[i] +
+                " does not meet the URL requirements. Please see instructions below"
+            );
+          }
           return;
         }
       }
