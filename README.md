@@ -6,7 +6,7 @@
 
 ## Overview
 
-This is a web app that helps you crawl multiple screenshots of websites concurrently. It will take the list of URLs you entered and capture theie page in screenshot and zip them into one zip file for you to download.
+This is a web app that helps you crawl multiple screenshots of websites concurrently. It will take the list of URLs you entered and take screenshot of the webpage and zip them into one zip file for you to download.
 It has Puppeteer Cluster to keep track of jobs and errors and the size of screenshot and the threshold of maximum concurrency can be customized if needed:
 
 - `maxConcurrency` Maximal number of parallel workers. Defaults to 10.
