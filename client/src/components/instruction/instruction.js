@@ -70,14 +70,14 @@ class Instruction extends React.Component {
                 className="instructionButton"
                 onClick={this.instructionClick.bind(this)}
               >
-                <FaCaretDown /> Instructions <FaCaretDown />
+                <FaCaretUp /> Instructions <FaCaretUp />
               </Button>
             ) : (
               <Button
                 className="instructionButton"
                 onClick={this.instructionClick.bind(this)}
               >
-                <FaCaretUp /> Instructions <FaCaretUp />
+                <FaCaretDown /> Instructions <FaCaretDown />
               </Button>
             )}
           </Col>
