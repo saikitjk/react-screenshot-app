@@ -1,9 +1,5 @@
 # React-Screenshot-App
 
-## Demo
-
-- https://react-screenshot-app.herokuapp.com/
-
 ## Overview
 
 This is a web app that helps you crawl multiple screenshots of websites concurrently. It will take the list of URLs you entered and take screenshot of the webpage and zip them into one zip file for you to download.
@@ -15,7 +11,15 @@ It has Puppeteer Cluster to keep track of jobs and errors and the size of screen
 - `timeout` Specify a timeout for all tasks. Defaults to 600000ms
 - Default screenshot size is set to full page
 
-#
+## Preview
+
+<div align="center">
+
+| Landing                                                 | Instructions                                            | Download                                                      |
+| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------- |
+| ![Landing screen showing URL input form and controls]() | ![Instructions expanded with multi-URL input example]() | ![Successful download message after processing screenshots]() |
+
+</div>
 
 ## Available Scripts
 
