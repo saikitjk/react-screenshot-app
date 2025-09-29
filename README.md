@@ -17,9 +17,13 @@ It has Puppeteer Cluster to keep track of jobs and errors and the size of screen
 
 | Landing                                                 | Instructions                                            | Download                                                      |
 | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------- |
-| ![Landing screen showing URL input form and controls]() | ![Instructions expanded with multi-URL input example]() | ![Successful download message after processing screenshots]() |
+| ![Landing screen showing URL input form and controls](https://github.com/user-attachments/assets/26baccbb-b1b5-4845-b553-1fb7f26ef5af) | ![Instructions expanded with multi-URL input example](https://github.com/user-attachments/assets/23391d69-e3bc-4a75-8096-aaf8b4aafa0d) | ![Successful download message after processing screenshots](https://github.com/user-attachments/assets/1a449e19-bf23-407f-bcd6-14ed803dbaf7) |
+
+
+
 
 </div>
+
 
 ## Available Scripts
 
